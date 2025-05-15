@@ -1,0 +1,53 @@
+/* RTL specific styles */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Flip icons in RTL mode */
+.rtl .icon-flip {
+  transform: scaleX(-1);
+}
+
+/* Adjust margins and paddings for RTL */
+.rtl .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.rtl .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.rtl .ml-1,
+.rtl .ml-2,
+.rtl .ml-3,
+.rtl .ml-4 {
+  margin-left: 0;
+  margin-right: 0.25rem;
+  margin-right: var(--ml-value, 0.25rem);
+}
+
+.rtl .mr-1,
+.rtl .mr-2,
+.rtl .mr-3,
+.rtl .mr-4 {
+  margin-right: 0;
+  margin-left: 0.25rem;
+  margin-left: var(--mr-value, 0.25rem);
+}
+
+/* Adjust flexbox for RTL */
+.rtl .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Adjust text alignment for RTL */
+.rtl .text-left {
+  text-align: right;
+}
+
+.rtl .text-right {
+  text-align: left;
+}

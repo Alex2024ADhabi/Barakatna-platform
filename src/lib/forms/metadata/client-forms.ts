@@ -1,0 +1,578 @@
+import { ClientType, FieldType, FormMetadata, FormModule } from "../types";
+import { formRegistry } from "../registry";
+
+/**
+ * Client Registration Form
+ * Used for registering new clients in the system
+ */
+export const clientRegistrationForm: FormMetadata = {
+  id: "client-registration-form",
+  title: "Client Registration",
+  description: "Register a new client organization in the system",
+  module: FormModule.CLIENT,
+  version: "1.0.0",
+  permissions: {
+    view: ["admin", "manager"],
+    create: ["admin"],
+    edit: ["admin"],
+    delete: ["admin"],
+    approve: ["admin"],
+    reject: ["admin"],
+    submit: ["admin", "manager"],
+    print: ["admin", "manager"],
+    export: ["admin", "manager"],
+  },
+  clientTypes: [
+    ClientType.FDF,
+    ClientType.ADHA,
+    ClientType.CASH,
+    ClientType.OTHER,
+  ],
+  sections: [
+    {
+      id: "basic-info",
+      title: "Basic Information",
+      description: "Enter the basic details of the client organization",
+      order: 1,
+      collapsible: false,
+    },
+    {
+      id: "contact-info",
+      title: "Contact Information",
+      description: "Enter contact details for the client organization",
+      order: 2,
+      collapsible: false,
+    },
+    {
+      id: "settings",
+      title: "Client Settings",
+      description: "Configure client-specific settings",
+      order: 3,
+      collapsible: true,
+      collapsed: true,
+    },
+  ],
+  fields: [
+    {
+      id: "client-name",
+      name: "clientName",
+      label: "Client Name",
+      type: FieldType.TEXT,
+      placeholder: "Enter client organization name",
+      helpText: "Official registered name of the client organization",
+      required: true,
+      section: "basic-info",
+      order: 1,
+      width: "full",
+      validation: [
+        {
+          type: "required",
+          message: "Client name is required",
+        },
+        {
+          type: "minLength",
+          value: 3,
+          message: "Client name must be at least 3 characters",
+        },
+      ],
+    },
+    {
+      id: "client-type",
+      name: "clientType",
+      label: "Client Type",
+      type: FieldType.SELECT,
+      required: true,
+      section: "basic-info",
+      order: 2,
+      width: "half",
+      options: [
+        { value: ClientType.FDF, label: "Family Development Foundation" },
+        { value: ClientType.ADHA, label: "Abu Dhabi Housing Authority" },
+        { value: ClientType.CASH, label: "Cash Client" },
+        { value: ClientType.OTHER, label: "Other" },
+      ],
+      validation: [
+        {
+          type: "required",
+          message: "Client type is required",
+        },
+      ],
+    },
+    {
+      id: "registration-number",
+      name: "registrationNumber",
+      label: "Registration Number",
+      type: FieldType.TEXT,
+      placeholder: "Enter official registration number",
+      helpText: "Official government registration number",
+      required: true,
+      section: "basic-info",
+      order: 3,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Registration number is required",
+        },
+        {
+          type: "pattern",
+          value: "^[A-Z0-9-]{5,20}$",
+          message: "Invalid registration number format",
+        },
+      ],
+    },
+    {
+      id: "establishment-date",
+      name: "establishmentDate",
+      label: "Establishment Date",
+      type: FieldType.DATE,
+      required: true,
+      section: "basic-info",
+      order: 4,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Establishment date is required",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-name",
+      name: "primaryContactName",
+      label: "Primary Contact Name",
+      type: FieldType.TEXT,
+      placeholder: "Enter name of primary contact person",
+      required: true,
+      section: "contact-info",
+      order: 1,
+      width: "full",
+      validation: [
+        {
+          type: "required",
+          message: "Primary contact name is required",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-email",
+      name: "primaryContactEmail",
+      label: "Primary Contact Email",
+      type: FieldType.EMAIL,
+      placeholder: "Enter email address",
+      required: true,
+      section: "contact-info",
+      order: 2,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Email address is required",
+        },
+        {
+          type: "email",
+          message: "Please enter a valid email address",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-phone",
+      name: "primaryContactPhone",
+      label: "Primary Contact Phone",
+      type: FieldType.PHONE,
+      placeholder: "+971 XX XXX XXXX",
+      required: true,
+      section: "contact-info",
+      order: 3,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Phone number is required",
+        },
+        {
+          type: "pattern",
+          value: "^\\+?[0-9\\s-]{10,15}$",
+          message: "Please enter a valid phone number",
+        },
+      ],
+    },
+    {
+      id: "address",
+      name: "address",
+      label: "Address",
+      type: FieldType.TEXTAREA,
+      placeholder: "Enter full address",
+      required: true,
+      section: "contact-info",
+      order: 4,
+      width: "full",
+      validation: [
+        {
+          type: "required",
+          message: "Address is required",
+        },
+      ],
+    },
+    {
+      id: "logo",
+      name: "logo",
+      label: "Organization Logo",
+      type: FieldType.FILE,
+      helpText: "Upload organization logo (PNG, JPG, SVG formats, max 2MB)",
+      required: false,
+      section: "settings",
+      order: 1,
+      width: "full",
+    },
+    {
+      id: "theme-color",
+      name: "themeColor",
+      label: "Theme Color",
+      type: FieldType.TEXT,
+      placeholder: "#RRGGBB",
+      helpText: "Primary color for client branding (hex code)",
+      required: false,
+      section: "settings",
+      order: 2,
+      width: "half",
+      validation: [
+        {
+          type: "pattern",
+          value: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+          message: "Please enter a valid hex color code",
+        },
+      ],
+    },
+    {
+      id: "active-status",
+      name: "isActive",
+      label: "Active Status",
+      type: FieldType.SWITCH,
+      helpText: "Toggle client active status",
+      defaultValue: true,
+      required: false,
+      section: "settings",
+      order: 3,
+      width: "half",
+    },
+  ],
+  dependencies: [],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  isActive: true,
+};
+
+/**
+ * Client Supplier Agreement Form
+ * Used for creating supplier agreements for clients
+ */
+export const clientSupplierAgreementForm: FormMetadata = {
+  id: "client-supplier-agreement-form",
+  title: "Client-Supplier Agreement",
+  description: "Create a new agreement between a client and supplier",
+  module: FormModule.CLIENT,
+  version: "1.0.0",
+  permissions: {
+    view: ["admin", "manager", "procurement"],
+    create: ["admin", "procurement"],
+    edit: ["admin", "procurement"],
+    delete: ["admin"],
+    approve: ["admin", "manager"],
+    reject: ["admin", "manager"],
+    submit: ["admin", "procurement"],
+    print: ["admin", "manager", "procurement"],
+    export: ["admin", "manager"],
+  },
+  clientTypes: [
+    ClientType.FDF,
+    ClientType.ADHA,
+    ClientType.CASH,
+    ClientType.OTHER,
+  ],
+  sections: [
+    {
+      id: "agreement-details",
+      title: "Agreement Details",
+      description: "Basic information about the agreement",
+      order: 1,
+      collapsible: false,
+    },
+    {
+      id: "financial-terms",
+      title: "Financial Terms",
+      description: "Financial details of the agreement",
+      order: 2,
+      collapsible: false,
+    },
+    {
+      id: "terms-conditions",
+      title: "Terms & Conditions",
+      description: "Legal terms and conditions",
+      order: 3,
+      collapsible: true,
+    },
+  ],
+  fields: [
+    {
+      id: "client-id",
+      name: "clientId",
+      label: "Client",
+      type: FieldType.SELECT,
+      required: true,
+      section: "agreement-details",
+      order: 1,
+      width: "half",
+      dataSource: {
+        type: "api",
+        source: "/api/clients",
+        valueField: "id",
+        labelField: "name",
+      },
+      validation: [
+        {
+          type: "required",
+          message: "Client is required",
+        },
+      ],
+    },
+    {
+      id: "supplier-id",
+      name: "supplierId",
+      label: "Supplier",
+      type: FieldType.SELECT,
+      required: true,
+      section: "agreement-details",
+      order: 2,
+      width: "half",
+      dataSource: {
+        type: "api",
+        source: "/api/suppliers",
+        valueField: "id",
+        labelField: "name",
+      },
+      validation: [
+        {
+          type: "required",
+          message: "Supplier is required",
+        },
+      ],
+    },
+    {
+      id: "agreement-title",
+      name: "agreementTitle",
+      label: "Agreement Title",
+      type: FieldType.TEXT,
+      placeholder: "Enter agreement title",
+      required: true,
+      section: "agreement-details",
+      order: 3,
+      width: "full",
+      validation: [
+        {
+          type: "required",
+          message: "Agreement title is required",
+        },
+      ],
+    },
+    {
+      id: "start-date",
+      name: "startDate",
+      label: "Start Date",
+      type: FieldType.DATE,
+      required: true,
+      section: "agreement-details",
+      order: 4,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Start date is required",
+        },
+      ],
+    },
+    {
+      id: "end-date",
+      name: "endDate",
+      label: "End Date",
+      type: FieldType.DATE,
+      required: true,
+      section: "agreement-details",
+      order: 5,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "End date is required",
+        },
+      ],
+      dependencies: [
+        {
+          type: "validation",
+          sourceField: "startDate",
+          condition:
+            "value && sourceValue && new Date(value) <= new Date(sourceValue)",
+          action: "return 'End date must be after start date'",
+        },
+      ],
+    },
+    {
+      id: "total-value",
+      name: "totalValue",
+      label: "Total Agreement Value",
+      type: FieldType.NUMBER,
+      placeholder: "Enter total value",
+      required: true,
+      section: "financial-terms",
+      order: 1,
+      width: "half",
+      validation: [
+        {
+          type: "required",
+          message: "Total value is required",
+        },
+        {
+          type: "minValue",
+          value: 0,
+          message: "Total value must be positive",
+        },
+      ],
+    },
+    {
+      id: "currency",
+      name: "currency",
+      label: "Currency",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-terms",
+      order: 2,
+      width: "half",
+      options: [
+        { value: "AED", label: "AED - UAE Dirham" },
+        { value: "USD", label: "USD - US Dollar" },
+        { value: "EUR", label: "EUR - Euro" },
+      ],
+      defaultValue: "AED",
+      validation: [
+        {
+          type: "required",
+          message: "Currency is required",
+        },
+      ],
+    },
+    {
+      id: "payment-terms",
+      name: "paymentTerms",
+      label: "Payment Terms",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-terms",
+      order: 3,
+      width: "half",
+      options: [
+        { value: "immediate", label: "Immediate" },
+        { value: "net15", label: "Net 15 Days" },
+        { value: "net30", label: "Net 30 Days" },
+        { value: "net60", label: "Net 60 Days" },
+        { value: "custom", label: "Custom" },
+      ],
+      validation: [
+        {
+          type: "required",
+          message: "Payment terms are required",
+        },
+      ],
+    },
+    {
+      id: "custom-payment-terms",
+      name: "customPaymentTerms",
+      label: "Custom Payment Terms",
+      type: FieldType.TEXTAREA,
+      placeholder: "Describe custom payment terms",
+      required: false,
+      section: "financial-terms",
+      order: 4,
+      width: "half",
+      conditional: {
+        field: "paymentTerms",
+        operator: "equals",
+        value: "custom",
+      },
+      validation: [
+        {
+          type: "required",
+          message:
+            "Custom payment terms are required when 'Custom' is selected",
+          condition: "formValues.paymentTerms === 'custom'",
+        },
+      ],
+    },
+    {
+      id: "terms-conditions-text",
+      name: "termsConditions",
+      label: "Terms & Conditions",
+      type: FieldType.TEXTAREA,
+      placeholder: "Enter terms and conditions",
+      required: true,
+      section: "terms-conditions",
+      order: 1,
+      width: "full",
+      validation: [
+        {
+          type: "required",
+          message: "Terms and conditions are required",
+        },
+      ],
+    },
+    {
+      id: "agreement-file",
+      name: "agreementFile",
+      label: "Upload Agreement Document",
+      type: FieldType.FILE,
+      helpText: "Upload signed agreement document (PDF format, max 10MB)",
+      required: false,
+      section: "terms-conditions",
+      order: 2,
+      width: "full",
+    },
+  ],
+  dependencies: [],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  isActive: true,
+};
+
+// Register forms with the form registry
+formRegistry.registerForm(
+  {
+    id: clientRegistrationForm.id,
+    title: clientRegistrationForm.title,
+    description: clientRegistrationForm.description,
+    module: clientRegistrationForm.module,
+    clientTypes: clientRegistrationForm.clientTypes,
+    permissions: clientRegistrationForm.permissions,
+    dependencies: clientRegistrationForm.dependencies,
+    version: clientRegistrationForm.version,
+    path: "/clients/register",
+    icon: "building",
+    isActive: true,
+  },
+  clientRegistrationForm,
+);
+
+formRegistry.registerForm(
+  {
+    id: clientSupplierAgreementForm.id,
+    title: clientSupplierAgreementForm.title,
+    description: clientSupplierAgreementForm.description,
+    module: clientSupplierAgreementForm.module,
+    clientTypes: clientSupplierAgreementForm.clientTypes,
+    permissions: clientSupplierAgreementForm.permissions,
+    dependencies: clientSupplierAgreementForm.dependencies,
+    version: clientSupplierAgreementForm.version,
+    path: "/clients/supplier-agreements",
+    icon: "file-contract",
+    isActive: true,
+  },
+  clientSupplierAgreementForm,
+);

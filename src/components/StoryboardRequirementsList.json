@@ -1,0 +1,888 @@
+{
+  "components": [
+    {
+      "name": "Dashboard Components",
+      "items": [
+        {
+          "component": "DashboardOverview",
+          "path": "src/components/Dashboard/DashboardOverview.tsx",
+          "hasStoryboard": true,
+          "description": "Main dashboard overview showing key metrics and navigation to different modules",
+          "priority": "High"
+        },
+        {
+          "component": "KPIDashboard",
+          "path": "src/components/Dashboard/KPIDashboard.tsx",
+          "hasStoryboard": false,
+          "description": "Dashboard showing key performance indicators across the platform",
+          "priority": "Medium"
+        },
+        {
+          "component": "WorkflowOverview",
+          "path": "src/components/Dashboard/WorkflowOverview.tsx",
+          "hasStoryboard": false,
+          "description": "Overview of active workflows and their statuses",
+          "priority": "Medium"
+        }
+      ]
+    },
+    {
+      "name": "Assessment Components",
+      "items": [
+        {
+          "component": "AssessmentDashboard",
+          "path": "src/components/Assessment/AssessmentDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for managing assessments with filtering and status tracking",
+          "priority": "High"
+        },
+        {
+          "component": "RoomAssessmentManager",
+          "path": "src/components/Assessment/RoomAssessmentManager.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing room-by-room assessments",
+          "priority": "High"
+        },
+        {
+          "component": "RoomAssessmentForm",
+          "path": "src/components/Assessment/RoomAssessmentForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for conducting room assessments with measurements and recommendations",
+          "priority": "High"
+        },
+        {
+          "component": "BathroomAssessmentForm",
+          "path": "src/components/Assessment/BathroomAssessmentForm.tsx",
+          "hasStoryboard": false,
+          "description": "Specialized form for bathroom assessments",
+          "priority": "Medium"
+        },
+        {
+          "component": "BathroomAssessmentFormShadcn",
+          "path": "src/components/Assessment/BathroomAssessmentFormShadcn.tsx",
+          "hasStoryboard": true,
+          "description": "Shadcn UI version of the bathroom assessment form",
+          "priority": "Medium"
+        },
+        {
+          "component": "MeasurementForm",
+          "path": "src/components/Assessment/MeasurementForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for recording measurements during assessments",
+          "priority": "Medium"
+        },
+        {
+          "component": "RecommendationPanel",
+          "path": "src/components/Assessment/RecommendationPanel.tsx",
+          "hasStoryboard": true,
+          "description": "Panel for adding and managing recommendations based on assessments",
+          "priority": "Medium"
+        },
+        {
+          "component": "AssessmentHistory",
+          "path": "src/components/Assessment/AssessmentHistory.tsx",
+          "hasStoryboard": true,
+          "description": "History view of past assessments with filtering and search",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Beneficiary Components",
+      "items": [
+        {
+          "component": "BeneficiaryProfile",
+          "path": "src/components/Beneficiary/BeneficiaryProfile.tsx",
+          "hasStoryboard": true,
+          "description": "Profile view for beneficiary information and history",
+          "priority": "High"
+        },
+        {
+          "component": "BeneficiaryRegistrationForm",
+          "path": "src/components/Beneficiary/BeneficiaryRegistrationForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for registering new beneficiaries",
+          "priority": "High"
+        },
+        {
+          "component": "BeneficiarySearchForm",
+          "path": "src/components/Beneficiary/BeneficiarySearchForm.tsx",
+          "hasStoryboard": false,
+          "description": "Search interface for finding beneficiaries",
+          "priority": "Medium"
+        },
+        {
+          "component": "BeneficiaryStatusTracker",
+          "path": "src/components/Beneficiary/BeneficiaryStatusTracker.tsx",
+          "hasStoryboard": false,
+          "description": "Tracker for monitoring beneficiary status through the workflow",
+          "priority": "Medium"
+        },
+        {
+          "component": "FamilyMemberForm",
+          "path": "src/components/Beneficiary/FamilyMemberForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for adding family members to a beneficiary profile",
+          "priority": "Low"
+        },
+        {
+          "component": "FamilyMemberList",
+          "path": "src/components/Beneficiary/FamilyMemberList.tsx",
+          "hasStoryboard": false,
+          "description": "List view of family members associated with a beneficiary",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Committee Components",
+      "items": [
+        {
+          "component": "CommitteeStoryboard",
+          "path": "src/components/Committee/CommitteeStoryboard.tsx",
+          "hasStoryboard": true,
+          "description": "Main committee management interface",
+          "priority": "High"
+        },
+        {
+          "component": "SubmissionReviewStoryboard",
+          "path": "src/components/Committee/SubmissionReviewStoryboard.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for reviewing and approving submissions",
+          "priority": "High"
+        },
+        {
+          "component": "CommitteeDecisionList",
+          "path": "src/components/Committee/CommitteeDecisionList.tsx",
+          "hasStoryboard": true,
+          "description": "List of committee decisions with filtering and search",
+          "priority": "Medium"
+        },
+        {
+          "component": "CommitteeForm",
+          "path": "src/components/Committee/CommitteeForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for creating and editing committees",
+          "priority": "Medium"
+        },
+        {
+          "component": "CommitteeList",
+          "path": "src/components/Committee/CommitteeList.tsx",
+          "hasStoryboard": false,
+          "description": "List view of all committees",
+          "priority": "Medium"
+        },
+        {
+          "component": "CommitteeMeetingSchedule",
+          "path": "src/components/Committee/CommitteeMeetingSchedule.tsx",
+          "hasStoryboard": false,
+          "description": "Calendar view for committee meeting scheduling",
+          "priority": "Low"
+        },
+        {
+          "component": "CommitteeMemberList",
+          "path": "src/components/Committee/CommitteeMemberList.tsx",
+          "hasStoryboard": false,
+          "description": "List of committee members with roles",
+          "priority": "Low"
+        },
+        {
+          "component": "SubmissionReviewForm",
+          "path": "src/components/Committee/SubmissionReviewForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for reviewing and making decisions on submissions",
+          "priority": "Medium"
+        }
+      ]
+    },
+    {
+      "name": "Project Components",
+      "items": [
+        {
+          "component": "ProjectManagementDashboard",
+          "path": "src/components/Project/ProjectManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for managing projects with status tracking and filtering",
+          "priority": "High"
+        },
+        {
+          "component": "ProjectForm",
+          "path": "src/components/Project/ProjectForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for creating and editing projects",
+          "priority": "High"
+        },
+        {
+          "component": "ProjectList",
+          "path": "src/components/Project/ProjectList.tsx",
+          "hasStoryboard": false,
+          "description": "List view of all projects with filtering and search",
+          "priority": "Medium"
+        },
+        {
+          "component": "ProjectTimeline",
+          "path": "src/components/Project/ProjectTimeline.tsx",
+          "hasStoryboard": false,
+          "description": "Timeline view of project milestones and progress",
+          "priority": "Medium"
+        },
+        {
+          "component": "TaskManagement",
+          "path": "src/components/Project/TaskManagement.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for managing project tasks",
+          "priority": "Medium"
+        },
+        {
+          "component": "TaskForm",
+          "path": "src/components/Project/TaskForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for creating and editing tasks",
+          "priority": "Low"
+        },
+        {
+          "component": "DocumentManagement",
+          "path": "src/components/Project/DocumentManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing project documents",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Budget Components",
+      "items": [
+        {
+          "component": "BudgetManagementDashboard",
+          "path": "src/components/Budget/BudgetManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for budget management and tracking",
+          "priority": "High"
+        },
+        {
+          "component": "BudgetSummary",
+          "path": "src/components/Budget/BudgetSummary.tsx",
+          "hasStoryboard": false,
+          "description": "Summary view of budget allocation and utilization",
+          "priority": "High"
+        },
+        {
+          "component": "BudgetAllocation",
+          "path": "src/components/Budget/BudgetAllocation.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for allocating budget to different categories",
+          "priority": "Medium"
+        },
+        {
+          "component": "BudgetApprovalWorkflow",
+          "path": "src/components/Budget/BudgetApprovalWorkflow.tsx",
+          "hasStoryboard": false,
+          "description": "Workflow for budget approval process",
+          "priority": "Medium"
+        },
+        {
+          "component": "BudgetCategoryManagement",
+          "path": "src/components/Budget/BudgetCategoryManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing budget categories",
+          "priority": "Low"
+        },
+        {
+          "component": "BudgetForecasting",
+          "path": "src/components/Budget/BudgetForecasting.tsx",
+          "hasStoryboard": false,
+          "description": "Forecasting tools for budget planning",
+          "priority": "Low"
+        },
+        {
+          "component": "MultiYearBudgetPlanning",
+          "path": "src/components/Budget/MultiYearBudgetPlanning.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for multi-year budget planning",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Financial Components",
+      "items": [
+        {
+          "component": "FinancialModuleDashboard",
+          "path": "src/components/Financial/FinancialModuleDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for financial management",
+          "priority": "High"
+        },
+        {
+          "component": "InvoiceManagementDashboard",
+          "path": "src/components/Financial/InvoiceManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for managing invoices",
+          "priority": "High"
+        },
+        {
+          "component": "InvoiceGenerator",
+          "path": "src/components/Financial/InvoiceGenerator.tsx",
+          "hasStoryboard": false,
+          "description": "Tool for generating invoices",
+          "priority": "Medium"
+        },
+        {
+          "component": "InvoiceList",
+          "path": "src/components/Financial/InvoiceList.tsx",
+          "hasStoryboard": false,
+          "description": "List view of all invoices with filtering and search",
+          "priority": "Medium"
+        },
+        {
+          "component": "PaymentForm",
+          "path": "src/components/Financial/PaymentForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for recording payments",
+          "priority": "Medium"
+        },
+        {
+          "component": "BillingProfileManagement",
+          "path": "src/components/Financial/BillingProfileManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing billing profiles",
+          "priority": "Low"
+        },
+        {
+          "component": "InvoiceTemplateEditor",
+          "path": "src/components/Financial/InvoiceTemplateEditor.tsx",
+          "hasStoryboard": false,
+          "description": "Editor for creating invoice templates",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Procurement Components",
+      "items": [
+        {
+          "component": "ProcurementManagementDashboard",
+          "path": "src/components/Procurement/ProcurementManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for procurement management",
+          "priority": "High"
+        },
+        {
+          "component": "PurchaseRequestForm",
+          "path": "src/components/Procurement/PurchaseRequestForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for creating purchase requests",
+          "priority": "High"
+        },
+        {
+          "component": "PurchaseOrderForm",
+          "path": "src/components/Procurement/PurchaseOrderForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for creating purchase orders",
+          "priority": "High"
+        },
+        {
+          "component": "InventoryManagement",
+          "path": "src/components/Procurement/InventoryManagement.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for managing inventory",
+          "priority": "Medium"
+        },
+        {
+          "component": "InventoryTransactionHistory",
+          "path": "src/components/Procurement/InventoryTransactionHistory.tsx",
+          "hasStoryboard": true,
+          "description": "History view of inventory transactions",
+          "priority": "Medium"
+        },
+        {
+          "component": "SupplierManagement",
+          "path": "src/components/Procurement/SupplierManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing suppliers",
+          "priority": "Medium"
+        },
+        {
+          "component": "EquipmentManagement",
+          "path": "src/components/Procurement/EquipmentManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing equipment",
+          "priority": "Low"
+        },
+        {
+          "component": "EquipmentAudit",
+          "path": "src/components/Procurement/EquipmentAudit.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for equipment auditing",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Program Components",
+      "items": [
+        {
+          "component": "ProgramManagementDashboard",
+          "path": "src/components/Program/ProgramManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for program management",
+          "priority": "High"
+        },
+        {
+          "component": "ProgramForm",
+          "path": "src/components/Program/ProgramForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for creating and editing programs",
+          "priority": "High"
+        },
+        {
+          "component": "ProgramList",
+          "path": "src/components/Program/ProgramList.tsx",
+          "hasStoryboard": true,
+          "description": "List view of all programs with filtering and search",
+          "priority": "Medium"
+        },
+        {
+          "component": "ProgramDetail",
+          "path": "src/components/Program/ProgramDetail.tsx",
+          "hasStoryboard": true,
+          "description": "Detailed view of a program",
+          "priority": "Medium"
+        },
+        {
+          "component": "ProgramBudget",
+          "path": "src/components/Program/ProgramBudget.tsx",
+          "hasStoryboard": true,
+          "description": "Budget view for a program",
+          "priority": "Medium"
+        },
+        {
+          "component": "ProgramProjectLinking",
+          "path": "src/components/Program/ProgramProjectLinking.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for linking projects to programs",
+          "priority": "Low"
+        },
+        {
+          "component": "ProgramRisks",
+          "path": "src/components/Program/ProgramRisks.tsx",
+          "hasStoryboard": true,
+          "description": "Risk management for programs",
+          "priority": "Low"
+        },
+        {
+          "component": "ProgramStakeholders",
+          "path": "src/components/Program/ProgramStakeholders.tsx",
+          "hasStoryboard": true,
+          "description": "Stakeholder management for programs",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Client Components",
+      "items": [
+        {
+          "component": "ClientManagementDashboard",
+          "path": "src/components/Client/ClientManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for client management",
+          "priority": "High"
+        },
+        {
+          "component": "ClientRegistrationForm",
+          "path": "src/components/Client/ClientRegistrationForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for registering new clients",
+          "priority": "High"
+        },
+        {
+          "component": "ClientConfigDisplay",
+          "path": "src/components/Client/ClientConfigDisplay.tsx",
+          "hasStoryboard": true,
+          "description": "Display for client configuration",
+          "priority": "Medium"
+        },
+        {
+          "component": "ClientConfigurationPanel",
+          "path": "src/components/Client/ClientConfigurationPanel.tsx",
+          "hasStoryboard": true,
+          "description": "Panel for configuring client settings",
+          "priority": "Medium"
+        },
+        {
+          "component": "ClientTypeIndicator",
+          "path": "src/components/Client/ClientTypeIndicator.tsx",
+          "hasStoryboard": true,
+          "description": "Indicator for client type",
+          "priority": "Low"
+        },
+        {
+          "component": "ClientTypeManager",
+          "path": "src/components/Client/ClientTypeManager.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for managing client types",
+          "priority": "Medium"
+        },
+        {
+          "component": "ClientTypeSelector",
+          "path": "src/components/Client/ClientTypeSelector.tsx",
+          "hasStoryboard": false,
+          "description": "Selector for choosing client types",
+          "priority": "Low"
+        },
+        {
+          "component": "ClientSupplierManager",
+          "path": "src/components/Client/ClientSupplierManager.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing client suppliers",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Workflow Components",
+      "items": [
+        {
+          "component": "WorkflowNavigator",
+          "path": "src/components/Workflow/WorkflowNavigator.tsx",
+          "hasStoryboard": true,
+          "description": "Navigator for workflow steps",
+          "priority": "High"
+        },
+        {
+          "component": "WorkflowStatusTracker",
+          "path": "src/components/Workflow/WorkflowStatusTracker.tsx",
+          "hasStoryboard": true,
+          "description": "Tracker for workflow status",
+          "priority": "High"
+        },
+        {
+          "component": "WorkflowNavigatorWithLanguage",
+          "path": "src/components/Workflow/WorkflowNavigatorWithLanguage.tsx",
+          "hasStoryboard": true,
+          "description": "Navigator for workflow steps with language support",
+          "priority": "Medium"
+        },
+        {
+          "component": "WorkflowNotificationIntegration",
+          "path": "src/components/Workflow/WorkflowNotificationIntegration.tsx",
+          "hasStoryboard": true,
+          "description": "Integration for workflow notifications",
+          "priority": "Medium"
+        },
+        {
+          "component": "WorkflowTemplateEditor",
+          "path": "src/components/Workflow/WorkflowTemplateEditor.tsx",
+          "hasStoryboard": false,
+          "description": "Editor for workflow templates",
+          "priority": "Low"
+        },
+        {
+          "component": "WorkflowMigrationTool",
+          "path": "src/components/Workflow/WorkflowMigrationTool.tsx",
+          "hasStoryboard": false,
+          "description": "Tool for migrating workflows",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Mobile Components",
+      "items": [
+        {
+          "component": "MobileNavigationBar",
+          "path": "src/components/Mobile/MobileNavigationBar.tsx",
+          "hasStoryboard": false,
+          "description": "Navigation bar for mobile interface",
+          "priority": "High"
+        },
+        {
+          "component": "MobileAssessmentList",
+          "path": "src/components/Mobile/MobileAssessmentList.tsx",
+          "hasStoryboard": false,
+          "description": "List of assessments for mobile interface",
+          "priority": "High"
+        },
+        {
+          "component": "MobileRoomAssessmentForm",
+          "path": "src/components/Mobile/MobileRoomAssessmentForm.tsx",
+          "hasStoryboard": false,
+          "description": "Room assessment form for mobile interface",
+          "priority": "High"
+        },
+        {
+          "component": "MobilePhotoCapture",
+          "path": "src/components/Mobile/MobilePhotoCapture.tsx",
+          "hasStoryboard": false,
+          "description": "Photo capture interface for mobile",
+          "priority": "Medium"
+        },
+        {
+          "component": "MobileSyncManager",
+          "path": "src/components/Mobile/MobileSyncManager.tsx",
+          "hasStoryboard": false,
+          "description": "Sync manager for mobile offline functionality",
+          "priority": "Medium"
+        },
+        {
+          "component": "OfflineAssessmentSummary",
+          "path": "src/components/Mobile/OfflineAssessmentSummary.tsx",
+          "hasStoryboard": false,
+          "description": "Summary of assessments available offline",
+          "priority": "Medium"
+        },
+        {
+          "component": "QuickAssessmentForm",
+          "path": "src/components/Mobile/QuickAssessmentForm.tsx",
+          "hasStoryboard": false,
+          "description": "Simplified assessment form for quick mobile entry",
+          "priority": "Low"
+        },
+        {
+          "component": "MobileDebugTools",
+          "path": "src/components/Mobile/MobileDebugTools.tsx",
+          "hasStoryboard": false,
+          "description": "Debugging tools for mobile interface",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Administration Components",
+      "items": [
+        {
+          "component": "AdminDashboard",
+          "path": "src/components/Administration/AdminDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for administration",
+          "priority": "High"
+        },
+        {
+          "component": "UserManagement",
+          "path": "src/components/Administration/UserManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Interface for managing users",
+          "priority": "High"
+        },
+        {
+          "component": "RoleManagement",
+          "path": "src/components/Administration/RoleManagement.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for managing roles",
+          "priority": "Medium"
+        },
+        {
+          "component": "SystemConfiguration",
+          "path": "src/components/Administration/SystemConfiguration.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for system configuration",
+          "priority": "Medium"
+        },
+        {
+          "component": "NotificationManagement",
+          "path": "src/components/Administration/NotificationManagement.tsx",
+          "hasStoryboard": false,
+          "description": "Interface for managing notifications",
+          "priority": "Medium"
+        },
+        {
+          "component": "AuditLogViewer",
+          "path": "src/components/Administration/AuditLogViewer.tsx",
+          "hasStoryboard": true,
+          "description": "Viewer for audit logs",
+          "priority": "Low"
+        },
+        {
+          "component": "SystemHealth",
+          "path": "src/components/Administration/SystemHealth.tsx",
+          "hasStoryboard": false,
+          "description": "Dashboard for system health monitoring",
+          "priority": "Low"
+        },
+        {
+          "component": "WorkflowDefinitionManager",
+          "path": "src/components/Administration/WorkflowDefinitionManager.tsx",
+          "hasStoryboard": true,
+          "description": "Manager for workflow definitions",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Senior Management Components",
+      "items": [
+        {
+          "component": "SeniorManagementDashboard",
+          "path": "src/components/SeniorManagement/SeniorManagementDashboard.tsx",
+          "hasStoryboard": true,
+          "description": "Dashboard for senior management",
+          "priority": "High"
+        },
+        {
+          "component": "PermissionsManager",
+          "path": "src/components/SeniorManagement/PermissionsManager.tsx",
+          "hasStoryboard": true,
+          "description": "Manager for permissions",
+          "priority": "Medium"
+        }
+      ]
+    },
+    {
+      "name": "Quality Components",
+      "items": [
+        {
+          "component": "QualityMetricsDashboard",
+          "path": "src/components/Quality/QualityMetricsDashboard.tsx",
+          "hasStoryboard": false,
+          "description": "Dashboard for quality metrics",
+          "priority": "High"
+        },
+        {
+          "component": "QualityChecklistManagement",
+          "path": "src/components/Quality/QualityChecklistManagement.tsx",
+          "hasStoryboard": true,
+          "description": "Management for quality checklists",
+          "priority": "Medium"
+        },
+        {
+          "component": "DefectTracking",
+          "path": "src/components/Quality/DefectTracking.tsx",
+          "hasStoryboard": false,
+          "description": "Tracking for defects",
+          "priority": "Medium"
+        }
+      ]
+    },
+    {
+      "name": "UI Components",
+      "items": [
+        {
+          "component": "DataVisualizationStoryboard",
+          "path": "src/components/ui/DataVisualizationStoryboard.tsx",
+          "hasStoryboard": true,
+          "description": "Storyboard for data visualization components",
+          "priority": "High"
+        },
+        {
+          "component": "BarChart",
+          "path": "src/components/ui/BarChart.tsx",
+          "hasStoryboard": false,
+          "description": "Bar chart component",
+          "priority": "Medium"
+        },
+        {
+          "component": "LineChart",
+          "path": "src/components/ui/LineChart.tsx",
+          "hasStoryboard": false,
+          "description": "Line chart component",
+          "priority": "Medium"
+        },
+        {
+          "component": "PieChart",
+          "path": "src/components/ui/PieChart.tsx",
+          "hasStoryboard": false,
+          "description": "Pie chart component",
+          "priority": "Medium"
+        },
+        {
+          "component": "GanttChart",
+          "path": "src/components/ui/GanttChart.tsx",
+          "hasStoryboard": false,
+          "description": "Gantt chart component",
+          "priority": "Medium"
+        },
+        {
+          "component": "HeatMap",
+          "path": "src/components/ui/HeatMap.tsx",
+          "hasStoryboard": false,
+          "description": "Heat map component",
+          "priority": "Low"
+        },
+        {
+          "component": "DataFilterPanel",
+          "path": "src/components/ui/DataFilterPanel.tsx",
+          "hasStoryboard": false,
+          "description": "Panel for filtering data",
+          "priority": "Medium"
+        },
+        {
+          "component": "DrillDownViewer",
+          "path": "src/components/ui/DrillDownViewer.tsx",
+          "hasStoryboard": true,
+          "description": "Viewer for drill-down data exploration",
+          "priority": "Medium"
+        },
+        {
+          "component": "TimelineExplorer",
+          "path": "src/components/ui/TimelineExplorer.tsx",
+          "hasStoryboard": false,
+          "description": "Explorer for timeline data",
+          "priority": "Low"
+        },
+        {
+          "component": "GeospatialViewer",
+          "path": "src/components/ui/GeospatialViewer.tsx",
+          "hasStoryboard": true,
+          "description": "Viewer for geospatial data",
+          "priority": "Low"
+        }
+      ]
+    },
+    {
+      "name": "Auth Components",
+      "items": [
+        {
+          "component": "LoginForm",
+          "path": "src/components/Auth/LoginForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for user login",
+          "priority": "High"
+        },
+        {
+          "component": "RegistrationForm",
+          "path": "src/components/Auth/RegistrationForm.tsx",
+          "hasStoryboard": true,
+          "description": "Form for user registration",
+          "priority": "High"
+        },
+        {
+          "component": "ForgotPasswordForm",
+          "path": "src/components/Auth/ForgotPasswordForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for password recovery",
+          "priority": "Medium"
+        },
+        {
+          "component": "ResetPasswordForm",
+          "path": "src/components/Auth/ResetPasswordForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for password reset",
+          "priority": "Medium"
+        },
+        {
+          "component": "MFAVerificationForm",
+          "path": "src/components/Auth/MFAVerificationForm.tsx",
+          "hasStoryboard": false,
+          "description": "Form for multi-factor authentication",
+          "priority": "Medium"
+        },
+        {
+          "component": "OAuthButtons",
+          "path": "src/components/Auth/OAuthButtons.tsx",
+          "hasStoryboard": true,
+          "description": "Buttons for OAuth authentication",
+          "priority": "Low"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalComponents": 132,
+    "implementedStoryboards": 58,
+    "pendingStoryboards": 74,
+    "highPriorityPending": 18,
+    "mediumPriorityPending": 36,
+    "lowPriorityPending": 20
+  }
+}

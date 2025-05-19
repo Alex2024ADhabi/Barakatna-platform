@@ -1,23 +1,77 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { useAppContext } from "../../App.provider";
 
-export default function DashboardOverview() {
+const DashboardOverview: React.FC = () => {
+  const { t } = useTranslation();
+  const { clientType } = useAppContext();
+
   return (
-    <div className="p-4 bg-white rounded-lg shadow">
-      <h2 className="text-xl font-bold mb-4">Dashboard Overview</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <h3 className="font-medium">Assessments</h3>
-          <p className="text-2xl font-bold">24</p>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">{t("dashboard")}</h1>
+        <div className="text-sm text-muted-foreground">
+          {clientType} {t("client")}
         </div>
-        <div className="p-4 bg-green-50 rounded-lg">
-          <h3 className="font-medium">Active Projects</h3>
-          <p className="text-2xl font-bold">12</p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("assessments")}
+          </div>
+          <div className="text-2xl font-bold">24</div>
         </div>
-        <div className="p-4 bg-purple-50 rounded-lg">
-          <h3 className="font-medium">Beneficiaries</h3>
-          <p className="text-2xl font-bold">56</p>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("projects")}
+          </div>
+          <div className="text-2xl font-bold">12</div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("beneficiaries")}
+          </div>
+          <div className="text-2xl font-bold">156</div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("pending_approvals")}
+          </div>
+          <div className="text-2xl font-bold">8</div>
+        </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <h2 className="text-xl font-semibold mb-4">
+            {t("recent_activities")}
+          </h2>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="h-2 w-2 rounded-full bg-primary"></div>
+                <div className="text-sm">
+                  {t("activity_item", { number: i })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <h2 className="text-xl font-semibold mb-4">{t("upcoming_tasks")}</h2>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="h-2 w-2 rounded-full bg-secondary"></div>
+                <div className="text-sm">{t("task_item", { number: i })}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default DashboardOverview;

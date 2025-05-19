@@ -1,137 +1,83 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { useAuth } from "../../context/AuthContext";
-import OAuthButtons from "./OAuthButtons";
-import { useToast } from "../ui/use-toast";
-import { Lock, Mail } from "lucide-react";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useAppContext } from "../../App.provider";
 
-const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const { toast } = useToast();
+const LoginForm: React.FC = () => {
+  const { t } = useTranslation();
+  const { setIsAuthenticated } = useAppContext();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      toast({
-        title: "Error",
-        description: "Please enter both email and password",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const success = await login(email, password);
-      if (success) {
-        // Check if there's a redirect URL in the query parameters
-        const params = new URLSearchParams(window.location.search);
-        const redirectUrl = params.get("redirect");
-
-        // Show success message
-        toast({
-          title: "Login Successful",
-          description: "You have been successfully logged in",
-        });
-
-        // Navigate to the redirect URL or home page
-        navigate(redirectUrl || "/");
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Simulate login
+    setIsAuthenticated(true);
+    // Redirect would happen here
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-[400px]">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-center">
-            Barakatna Platform
-          </CardTitle>
-          <CardDescription className="text-center">
-            Enter your credentials to sign in
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <form onSubmit={handleSubmit}>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="name@example.com"
-                    className="pl-10"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    disabled={isSubmitting}
-                  />
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-800"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="password"
-                    type="password"
-                    className="pl-10"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={isSubmitting}
-                  />
-                </div>
-              </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Signing in..." : "Sign In"}
-              </Button>
-            </div>
-          </form>
-          <OAuthButtons />
-        </CardContent>
-        <CardFooter className="flex flex-col">
-          <div className="text-sm text-center text-gray-700 mb-2">
-            Don't have an account?{" "}
-            <a
-              href="/register"
-              className="text-blue-600 hover:text-blue-800 font-medium"
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold">{t("login")}</h2>
+        <p className="text-sm text-muted-foreground">
+          {t("enter_credentials")}
+        </p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <label htmlFor="username" className="text-sm font-medium">
+            {t("username")}
+          </label>
+          <input
+            id="username"
+            type="text"
+            placeholder={t("enter_username")}
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label htmlFor="password" className="text-sm font-medium">
+              {t("password")}
+            </label>
+            <Link
+              to="/auth/forgot-password"
+              className="text-xs text-primary hover:underline"
             >
-              Create Account
-            </a>
+              {t("forgot_password")}
+            </Link>
           </div>
-          <p className="text-xs text-center text-gray-700">
-            Senior Care Home Modification System
-          </p>
-        </CardFooter>
-      </Card>
+          <input
+            id="password"
+            type="password"
+            placeholder={t("enter_password")}
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            required
+          />
+        </div>
+        <div className="flex items-center space-x-2">
+          <input
+            id="remember"
+            type="checkbox"
+            className="h-4 w-4 rounded border border-input bg-transparent shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          />
+          <label htmlFor="remember" className="text-sm font-medium">
+            {t("remember_me")}
+          </label>
+        </div>
+        <button
+          type="submit"
+          className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        >
+          {t("login")}
+        </button>
+      </form>
+      <div className="text-center text-sm">
+        <span className="text-muted-foreground">{t("dont_have_account")} </span>
+        <Link to="/auth/register" className="text-primary hover:underline">
+          {t("register")}
+        </Link>
+      </div>
     </div>
   );
 };

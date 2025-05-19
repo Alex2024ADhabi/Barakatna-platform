@@ -1,8 +1,634 @@
-import { ClientType, FieldType, FormMetadata, FormModule } from "../types";
+import {
+  ClientType,
+  FieldType,
+  FormMetadata,
+  FormModule,
+  FormPermission,
+  ValidationRuleType,
+} from "../types";
 import { formRegistry } from "../registry";
 
 /**
- * Client Registration Form
+ * Client Profile Form (F02.1)
+ * Used for managing client organization profiles in the system
+ */
+export const clientProfileForm: FormMetadata = {
+  id: "client-profile-form",
+  title: "Client Profile",
+  description: "Manage client organization profile information",
+  module: FormModule.CLIENT,
+  version: "1.0.0",
+  permissions: {
+    [FormPermission.VIEW]: ["admin", "manager", "client-manager"],
+    [FormPermission.CREATE]: ["admin"],
+    [FormPermission.EDIT]: ["admin", "manager"],
+    [FormPermission.DELETE]: ["admin"],
+    [FormPermission.APPROVE]: ["admin"],
+    [FormPermission.REJECT]: ["admin"],
+    [FormPermission.SUBMIT]: ["admin", "manager"],
+    [FormPermission.PRINT]: ["admin", "manager", "client-manager"],
+    [FormPermission.EXPORT]: ["admin", "manager"],
+  },
+  clientTypes: [
+    ClientType.FDF,
+    ClientType.ADHA,
+    ClientType.CASH,
+    ClientType.OTHER,
+  ],
+  sections: [
+    {
+      id: "organization-info",
+      title: "Organization Information",
+      description: "Basic details about the client organization",
+      order: 1,
+      collapsible: false,
+    },
+    {
+      id: "contact-details",
+      title: "Contact Details",
+      description: "Primary and secondary contact information",
+      order: 2,
+      collapsible: false,
+    },
+    {
+      id: "service-preferences",
+      title: "Service Preferences",
+      description: "Client service preferences and requirements",
+      order: 3,
+      collapsible: true,
+    },
+    {
+      id: "financial-details",
+      title: "Financial Details",
+      description: "Financial information and payment preferences",
+      order: 4,
+      collapsible: true,
+    },
+    {
+      id: "documents",
+      title: "Documents",
+      description: "Client-related documents and files",
+      order: 5,
+      collapsible: true,
+    },
+  ],
+  fields: [
+    {
+      id: "client-id",
+      name: "clientId",
+      label: "Client ID",
+      type: FieldType.TEXT,
+      readOnly: true,
+      required: false,
+      section: "organization-info",
+      order: 1,
+      width: "full",
+      helpText: "Auto-generated unique identifier (Format: CLT-YYYY-NNNNN)",
+      defaultValue: "",
+    },
+    {
+      id: "organization-name-en",
+      name: "organizationNameEn",
+      label: "Organization Name (English)",
+      type: FieldType.TEXT,
+      placeholder: "Enter organization name in English",
+      required: true,
+      section: "organization-info",
+      order: 2,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Organization name is required",
+        },
+        {
+          type: ValidationRuleType.MIN_LENGTH,
+          value: 3,
+          message: "Organization name must be at least 3 characters",
+        },
+      ],
+    },
+    {
+      id: "organization-name-ar",
+      name: "organizationNameAr",
+      label: "Organization Name (Arabic)",
+      type: FieldType.TEXT,
+      placeholder: "Enter organization name in Arabic",
+      required: true,
+      section: "organization-info",
+      order: 3,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Organization name in Arabic is required",
+        },
+        {
+          type: ValidationRuleType.MIN_LENGTH,
+          value: 3,
+          message: "Organization name must be at least 3 characters",
+        },
+      ],
+    },
+    {
+      id: "client-type",
+      name: "clientType",
+      label: "Client Type",
+      type: FieldType.SELECT,
+      required: true,
+      section: "organization-info",
+      order: 4,
+      width: "half",
+      options: [
+        { value: ClientType.FDF, label: "Family Development Foundation" },
+        { value: ClientType.ADHA, label: "Abu Dhabi Housing Authority" },
+        { value: ClientType.CASH, label: "Cash Client" },
+        { value: ClientType.OTHER, label: "Other" },
+      ],
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Client type is required",
+        },
+      ],
+    },
+    {
+      id: "registration-number",
+      name: "registrationNumber",
+      label: "Registration Number",
+      type: FieldType.TEXT,
+      placeholder: "Enter official registration number",
+      helpText: "Official government registration number",
+      required: true,
+      section: "organization-info",
+      order: 5,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Registration number is required",
+        },
+        {
+          type: ValidationRuleType.PATTERN,
+          value: "^[A-Z0-9-]{5,20}$",
+          message: "Invalid registration number format",
+        },
+      ],
+    },
+    {
+      id: "establishment-date",
+      name: "establishmentDate",
+      label: "Establishment Date",
+      type: FieldType.DATE,
+      required: true,
+      section: "organization-info",
+      order: 6,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Establishment date is required",
+        },
+      ],
+    },
+    {
+      id: "organization-description",
+      name: "organizationDescription",
+      label: "Organization Description",
+      type: FieldType.TEXTAREA,
+      placeholder: "Enter a brief description of the organization",
+      required: false,
+      section: "organization-info",
+      order: 7,
+      width: "full",
+      validation: [
+        {
+          type: ValidationRuleType.MAX_LENGTH,
+          value: 1000,
+          message: "Description cannot exceed 1000 characters",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-name",
+      name: "primaryContactName",
+      label: "Primary Contact Name",
+      type: FieldType.TEXT,
+      placeholder: "Enter name of primary contact person",
+      required: true,
+      section: "contact-details",
+      order: 1,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Primary contact name is required",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-position",
+      name: "primaryContactPosition",
+      label: "Primary Contact Position",
+      type: FieldType.TEXT,
+      placeholder: "Enter position/title",
+      required: true,
+      section: "contact-details",
+      order: 2,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Primary contact position is required",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-email",
+      name: "primaryContactEmail",
+      label: "Primary Contact Email",
+      type: FieldType.EMAIL,
+      placeholder: "Enter email address",
+      required: true,
+      section: "contact-details",
+      order: 3,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Email address is required",
+        },
+        {
+          type: ValidationRuleType.EMAIL,
+          message: "Please enter a valid email address",
+        },
+      ],
+    },
+    {
+      id: "primary-contact-phone",
+      name: "primaryContactPhone",
+      label: "Primary Contact Phone",
+      type: FieldType.PHONE,
+      placeholder: "+971 XX XXX XXXX",
+      required: true,
+      section: "contact-details",
+      order: 4,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Phone number is required",
+        },
+        {
+          type: ValidationRuleType.PATTERN,
+          value: "^\\+?[0-9\\s-]{10,15}$",
+          message: "Please enter a valid phone number",
+        },
+      ],
+    },
+    {
+      id: "secondary-contact-name",
+      name: "secondaryContactName",
+      label: "Secondary Contact Name",
+      type: FieldType.TEXT,
+      placeholder: "Enter name of secondary contact person",
+      required: false,
+      section: "contact-details",
+      order: 5,
+      width: "half",
+    },
+    {
+      id: "secondary-contact-position",
+      name: "secondaryContactPosition",
+      label: "Secondary Contact Position",
+      type: FieldType.TEXT,
+      placeholder: "Enter position/title",
+      required: false,
+      section: "contact-details",
+      order: 6,
+      width: "half",
+    },
+    {
+      id: "secondary-contact-email",
+      name: "secondaryContactEmail",
+      label: "Secondary Contact Email",
+      type: FieldType.EMAIL,
+      placeholder: "Enter email address",
+      required: false,
+      section: "contact-details",
+      order: 7,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.EMAIL,
+          message: "Please enter a valid email address",
+        },
+      ],
+    },
+    {
+      id: "secondary-contact-phone",
+      name: "secondaryContactPhone",
+      label: "Secondary Contact Phone",
+      type: FieldType.PHONE,
+      placeholder: "+971 XX XXX XXXX",
+      required: false,
+      section: "contact-details",
+      order: 8,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.PATTERN,
+          value: "^\\+?[0-9\\s-]{10,15}$",
+          message: "Please enter a valid phone number",
+        },
+      ],
+    },
+    {
+      id: "physical-address",
+      name: "physicalAddress",
+      label: "Physical Address",
+      type: FieldType.TEXTAREA,
+      placeholder: "Enter full address",
+      required: true,
+      section: "contact-details",
+      order: 9,
+      width: "full",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Physical address is required",
+        },
+      ],
+    },
+    {
+      id: "service-area",
+      name: "serviceArea",
+      label: "Service Area",
+      type: FieldType.MULTISELECT,
+      required: true,
+      section: "service-preferences",
+      order: 1,
+      width: "full",
+      options: [
+        { value: "Abu Dhabi City", label: "Abu Dhabi City" },
+        { value: "Al Ain", label: "Al Ain" },
+        { value: "Al Dhafra", label: "Al Dhafra" },
+        { value: "Dubai", label: "Dubai" },
+        { value: "Sharjah", label: "Sharjah" },
+        { value: "Ajman", label: "Ajman" },
+        { value: "Umm Al Quwain", label: "Umm Al Quwain" },
+        { value: "Ras Al Khaimah", label: "Ras Al Khaimah" },
+        { value: "Fujairah", label: "Fujairah" },
+      ],
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "At least one service area must be selected",
+        },
+      ],
+    },
+    {
+      id: "service-types",
+      name: "serviceTypes",
+      label: "Service Types",
+      type: FieldType.MULTISELECT,
+      required: true,
+      section: "service-preferences",
+      order: 2,
+      width: "full",
+      options: [
+        { value: "Home Modification", label: "Home Modification" },
+        {
+          value: "Accessibility Assessment",
+          label: "Accessibility Assessment",
+        },
+        { value: "Equipment Installation", label: "Equipment Installation" },
+        { value: "Maintenance", label: "Maintenance" },
+        { value: "Consultation", label: "Consultation" },
+        { value: "Training", label: "Training" },
+      ],
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "At least one service type must be selected",
+        },
+      ],
+    },
+    {
+      id: "preferred-communication",
+      name: "preferredCommunication",
+      label: "Preferred Communication Method",
+      type: FieldType.SELECT,
+      required: true,
+      section: "service-preferences",
+      order: 3,
+      width: "half",
+      options: [
+        { value: "Email", label: "Email" },
+        { value: "Phone", label: "Phone" },
+        { value: "SMS", label: "SMS" },
+        { value: "Portal", label: "Client Portal" },
+      ],
+      defaultValue: "Email",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Preferred communication method is required",
+        },
+      ],
+    },
+    {
+      id: "service-level",
+      name: "serviceLevel",
+      label: "Service Level",
+      type: FieldType.SELECT,
+      required: true,
+      section: "service-preferences",
+      order: 4,
+      width: "half",
+      options: [
+        { value: "Standard", label: "Standard" },
+        { value: "Premium", label: "Premium" },
+        { value: "Custom", label: "Custom" },
+      ],
+      defaultValue: "Standard",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Service level is required",
+        },
+      ],
+    },
+    {
+      id: "billing-cycle",
+      name: "billingCycle",
+      label: "Billing Cycle",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-details",
+      order: 1,
+      width: "half",
+      options: [
+        { value: "Per Project", label: "Per Project" },
+        { value: "Monthly", label: "Monthly" },
+        { value: "Quarterly", label: "Quarterly" },
+        { value: "Annually", label: "Annually" },
+      ],
+      defaultValue: "Per Project",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Billing cycle is required",
+        },
+      ],
+    },
+    {
+      id: "payment-method",
+      name: "paymentMethod",
+      label: "Payment Method",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-details",
+      order: 2,
+      width: "half",
+      options: [
+        { value: "Bank Transfer", label: "Bank Transfer" },
+        { value: "Credit Card", label: "Credit Card" },
+        { value: "Check", label: "Check" },
+        { value: "Cash", label: "Cash" },
+      ],
+      defaultValue: "Bank Transfer",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Payment method is required",
+        },
+      ],
+    },
+    {
+      id: "tax-id",
+      name: "taxId",
+      label: "Tax ID",
+      type: FieldType.TEXT,
+      placeholder: "Enter tax identification number",
+      required: false,
+      section: "financial-details",
+      order: 3,
+      width: "half",
+    },
+    {
+      id: "currency",
+      name: "currency",
+      label: "Preferred Currency",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-details",
+      order: 4,
+      width: "half",
+      options: [
+        { value: "AED", label: "AED - UAE Dirham" },
+        { value: "USD", label: "USD - US Dollar" },
+        { value: "EUR", label: "EUR - Euro" },
+      ],
+      defaultValue: "AED",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Currency is required",
+        },
+      ],
+    },
+    {
+      id: "credit-limit",
+      name: "creditLimit",
+      label: "Credit Limit (AED)",
+      type: FieldType.NUMBER,
+      placeholder: "Enter credit limit amount",
+      required: false,
+      section: "financial-details",
+      order: 5,
+      width: "half",
+      validation: [
+        {
+          type: ValidationRuleType.MIN_VALUE,
+          value: 0,
+          message: "Credit limit cannot be negative",
+        },
+      ],
+    },
+    {
+      id: "payment-terms",
+      name: "paymentTerms",
+      label: "Payment Terms",
+      type: FieldType.SELECT,
+      required: true,
+      section: "financial-details",
+      order: 6,
+      width: "half",
+      options: [
+        { value: "immediate", label: "Immediate" },
+        { value: "net15", label: "Net 15 Days" },
+        { value: "net30", label: "Net 30 Days" },
+        { value: "net60", label: "Net 60 Days" },
+        { value: "custom", label: "Custom" },
+      ],
+      defaultValue: "net30",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Payment terms are required",
+        },
+      ],
+    },
+    {
+      id: "logo",
+      name: "logo",
+      label: "Organization Logo",
+      type: FieldType.IMAGE,
+      helpText: "Upload organization logo (PNG, JPG, SVG formats, max 2MB)",
+      required: false,
+      section: "documents",
+      order: 1,
+      width: "full",
+    },
+    {
+      id: "registration-certificate",
+      name: "registrationCertificate",
+      label: "Registration Certificate",
+      type: FieldType.FILE,
+      helpText: "Upload registration certificate (PDF format, max 5MB)",
+      required: true,
+      section: "documents",
+      order: 2,
+      width: "full",
+      validation: [
+        {
+          type: ValidationRuleType.REQUIRED,
+          message: "Registration certificate is required",
+        },
+      ],
+    },
+    {
+      id: "additional-documents",
+      name: "additionalDocuments",
+      label: "Additional Documents",
+      type: FieldType.FILE,
+      helpText: "Upload additional supporting documents (max 10MB each)",
+      required: false,
+      section: "documents",
+      order: 3,
+      width: "full",
+      multiple: true,
+    },
+  ],
+  dependencies: [],
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  isActive: true,
+};
+
+/**
+ * Client Registration Form (F02.2)
  * Used for registering new clients in the system
  */
 export const clientRegistrationForm: FormMetadata = {
@@ -12,15 +638,15 @@ export const clientRegistrationForm: FormMetadata = {
   module: FormModule.CLIENT,
   version: "1.0.0",
   permissions: {
-    view: ["admin", "manager"],
-    create: ["admin"],
-    edit: ["admin"],
-    delete: ["admin"],
-    approve: ["admin"],
-    reject: ["admin"],
-    submit: ["admin", "manager"],
-    print: ["admin", "manager"],
-    export: ["admin", "manager"],
+    [FormPermission.VIEW]: ["admin", "manager"],
+    [FormPermission.CREATE]: ["admin"],
+    [FormPermission.EDIT]: ["admin"],
+    [FormPermission.DELETE]: ["admin"],
+    [FormPermission.APPROVE]: ["admin"],
+    [FormPermission.REJECT]: ["admin"],
+    [FormPermission.SUBMIT]: ["admin", "manager"],
+    [FormPermission.PRINT]: ["admin", "manager"],
+    [FormPermission.EXPORT]: ["admin", "manager"],
   },
   clientTypes: [
     ClientType.FDF,
@@ -66,11 +692,11 @@ export const clientRegistrationForm: FormMetadata = {
       width: "full",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Client name is required",
         },
         {
-          type: "minLength",
+          type: ValidationRuleType.MIN_LENGTH,
           value: 3,
           message: "Client name must be at least 3 characters",
         },
@@ -93,7 +719,7 @@ export const clientRegistrationForm: FormMetadata = {
       ],
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Client type is required",
         },
       ],
@@ -111,11 +737,11 @@ export const clientRegistrationForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Registration number is required",
         },
         {
-          type: "pattern",
+          type: ValidationRuleType.PATTERN,
           value: "^[A-Z0-9-]{5,20}$",
           message: "Invalid registration number format",
         },
@@ -132,7 +758,7 @@ export const clientRegistrationForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Establishment date is required",
         },
       ],
@@ -149,7 +775,7 @@ export const clientRegistrationForm: FormMetadata = {
       width: "full",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Primary contact name is required",
         },
       ],
@@ -166,11 +792,11 @@ export const clientRegistrationForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Email address is required",
         },
         {
-          type: "email",
+          type: ValidationRuleType.EMAIL,
           message: "Please enter a valid email address",
         },
       ],
@@ -187,11 +813,11 @@ export const clientRegistrationForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Phone number is required",
         },
         {
-          type: "pattern",
+          type: ValidationRuleType.PATTERN,
           value: "^\\+?[0-9\\s-]{10,15}$",
           message: "Please enter a valid phone number",
         },
@@ -209,7 +835,7 @@ export const clientRegistrationForm: FormMetadata = {
       width: "full",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Address is required",
         },
       ],
@@ -238,7 +864,7 @@ export const clientRegistrationForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "pattern",
+          type: ValidationRuleType.PATTERN,
           value: "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
           message: "Please enter a valid hex color code",
         },
@@ -264,7 +890,7 @@ export const clientRegistrationForm: FormMetadata = {
 };
 
 /**
- * Client Supplier Agreement Form
+ * Client Supplier Agreement Form (F02.3)
  * Used for creating supplier agreements for clients
  */
 export const clientSupplierAgreementForm: FormMetadata = {
@@ -274,15 +900,15 @@ export const clientSupplierAgreementForm: FormMetadata = {
   module: FormModule.CLIENT,
   version: "1.0.0",
   permissions: {
-    view: ["admin", "manager", "procurement"],
-    create: ["admin", "procurement"],
-    edit: ["admin", "procurement"],
-    delete: ["admin"],
-    approve: ["admin", "manager"],
-    reject: ["admin", "manager"],
-    submit: ["admin", "procurement"],
-    print: ["admin", "manager", "procurement"],
-    export: ["admin", "manager"],
+    [FormPermission.VIEW]: ["admin", "manager", "procurement"],
+    [FormPermission.CREATE]: ["admin", "procurement"],
+    [FormPermission.EDIT]: ["admin", "procurement"],
+    [FormPermission.DELETE]: ["admin"],
+    [FormPermission.APPROVE]: ["admin", "manager"],
+    [FormPermission.REJECT]: ["admin", "manager"],
+    [FormPermission.SUBMIT]: ["admin", "procurement"],
+    [FormPermission.PRINT]: ["admin", "manager", "procurement"],
+    [FormPermission.EXPORT]: ["admin", "manager"],
   },
   clientTypes: [
     ClientType.FDF,
@@ -331,7 +957,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       },
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Client is required",
         },
       ],
@@ -353,7 +979,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       },
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Supplier is required",
         },
       ],
@@ -370,7 +996,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       width: "full",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Agreement title is required",
         },
       ],
@@ -386,7 +1012,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Start date is required",
         },
       ],
@@ -402,7 +1028,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "End date is required",
         },
       ],
@@ -428,11 +1054,11 @@ export const clientSupplierAgreementForm: FormMetadata = {
       width: "half",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Total value is required",
         },
         {
-          type: "minValue",
+          type: ValidationRuleType.MIN_VALUE,
           value: 0,
           message: "Total value must be positive",
         },
@@ -455,7 +1081,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       defaultValue: "AED",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Currency is required",
         },
       ],
@@ -478,7 +1104,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       ],
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Payment terms are required",
         },
       ],
@@ -500,7 +1126,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       },
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message:
             "Custom payment terms are required when 'Custom' is selected",
           condition: "formValues.paymentTerms === 'custom'",
@@ -519,7 +1145,7 @@ export const clientSupplierAgreementForm: FormMetadata = {
       width: "full",
       validation: [
         {
-          type: "required",
+          type: ValidationRuleType.REQUIRED,
           message: "Terms and conditions are required",
         },
       ],
@@ -545,6 +1171,23 @@ export const clientSupplierAgreementForm: FormMetadata = {
 // Register forms with the form registry
 formRegistry.registerForm(
   {
+    id: clientProfileForm.id,
+    title: clientProfileForm.title,
+    description: clientProfileForm.description,
+    module: clientProfileForm.module,
+    clientTypes: clientProfileForm.clientTypes,
+    permissions: clientProfileForm.permissions,
+    dependencies: clientProfileForm.dependencies,
+    version: clientProfileForm.version,
+    path: "/clients/profile",
+    icon: "building",
+    isActive: true,
+  },
+  clientProfileForm,
+);
+
+formRegistry.registerForm(
+  {
     id: clientRegistrationForm.id,
     title: clientRegistrationForm.title,
     description: clientRegistrationForm.description,
@@ -554,7 +1197,7 @@ formRegistry.registerForm(
     dependencies: clientRegistrationForm.dependencies,
     version: clientRegistrationForm.version,
     path: "/clients/register",
-    icon: "building",
+    icon: "building-2",
     isActive: true,
   },
   clientRegistrationForm,

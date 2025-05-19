@@ -1,7 +1,45 @@
 // Export all form metadata
 export * from "./assessment-forms";
 export * from "./project-forms";
+export * from "./beneficiary-forms";
+export * from "./client-forms";
+export * from "./program-forms";
+export * from "./committee-forms";
+export * from "./room-forms";
+export * from "./initial-assessment-form";
+export * from "./home-safety-assessment-form";
+export * from "./mental-health-assessment-form";
+export * from "./functional-assessment-form";
+export * from "./social-assessment-form";
+export * from "./beneficiary-qualification-form";
+export * from "./assessment-eligibility-form";
+export * from "./client-service-agreement-form";
+export * from "./client-feedback-form";
+export * from "./budget-forms";
+export * from "./financial-forms";
+export * from "./inventory-forms";
+export * from "./case-forms";
+export * from "./admin-forms";
 
 // Import all form metadata to ensure they are registered
 import "./assessment-forms";
 import "./project-forms";
+import "./beneficiary-forms";
+import "./client-forms";
+import "./program-forms";
+import "./committee-forms";
+import "./room-forms";
+import "./initial-assessment-form";
+import "./home-safety-assessment-form";
+import "./mental-health-assessment-form";
+import "./functional-assessment-form";
+import "./social-assessment-form";
+import "./beneficiary-qualification-form";
+import "./assessment-eligibility-form";
+import "./client-service-agreement-form";
+import "./client-feedback-form";
+import "./budget-forms";
+import "./financial-forms";
+import "./inventory-forms";
+import "./case-forms";
+import "./admin-forms";

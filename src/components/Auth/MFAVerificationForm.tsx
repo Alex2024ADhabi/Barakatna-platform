@@ -1,93 +1,59 @@
 import React, { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { useTranslation } from "react-i18next";
+import { useAppContext } from "../../App.provider";
 
-interface MFAVerificationFormProps {
-  onVerify?: (code: string) => void;
-  onCancel?: () => void;
-  isLoading?: boolean;
-}
-
-const MFAVerificationForm = ({
-  onVerify,
-  onCancel,
-  isLoading = false,
-}: MFAVerificationFormProps) => {
-  const [verificationCode, setVerificationCode] = useState("");
-  const [error, setError] = useState("");
+const MFAVerificationForm: React.FC = () => {
+  const { t } = useTranslation();
+  const { setIsAuthenticated } = useAppContext();
+  const [code, setCode] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
-    if (!verificationCode.trim()) {
-      setError("Please enter the verification code");
-      return;
-    }
-
-    if (onVerify) {
-      onVerify(verificationCode);
+    // Verify MFA code logic would go here
+    if (code.length === 6) {
+      setIsAuthenticated(true);
+      // Redirect would happen here
     }
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Two-Factor Authentication
-        </CardTitle>
-        <CardDescription className="text-center">
-          Enter the verification code sent to your device
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Input
-                id="verification-code"
-                placeholder="Enter verification code"
-                type="text"
-                value={verificationCode}
-                onChange={(e) => setVerificationCode(e.target.value)}
-                className="text-center text-xl tracking-widest"
-                maxLength={6}
-                autoComplete="one-time-code"
-              />
-              {error && <p className="text-sm text-red-500">{error}</p>}
-            </div>
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex flex-col space-y-2">
-        <Button
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold">{t("two_factor_authentication")}</h2>
+        <p className="text-sm text-muted-foreground mt-2">
+          {t("enter_verification_code")}
+        </p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <label htmlFor="code" className="text-sm font-medium">
+            {t("verification_code")}
+          </label>
+          <input
+            id="code"
+            type="text"
+            placeholder="000000"
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring text-center tracking-widest font-mono"
+            maxLength={6}
+            value={code}
+            onChange={(e) => setCode(e.target.value.replace(/[^0-9]/g, ""))}
+            required
+          />
+        </div>
+        <button
           type="submit"
-          className="w-full"
-          onClick={handleSubmit}
-          disabled={isLoading}
+          className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          disabled={code.length !== 6}
         >
-          {isLoading ? "Verifying..." : "Verify"}
-        </Button>
-        {onCancel && (
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={onCancel}
-            disabled={isLoading}
-          >
-            Cancel
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+          {t("verify")}
+        </button>
+      </form>
+      <div className="text-center text-sm">
+        <button className="text-primary hover:underline">
+          {t("resend_code")}
+        </button>
+      </div>
+    </div>
   );
 };
 

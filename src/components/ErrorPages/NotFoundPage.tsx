@@ -1,29 +1,25 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
-export default function NotFoundPage() {
+const NotFoundPage: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          404
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          {t("errors.notFound")}
-        </p>
-      </div>
-
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <Button asChild>
-            <Link to="/">{t("common.backToHome")}</Link>
-          </Button>
-        </div>
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-16rem)] text-center">
+      <h1 className="text-9xl font-bold text-muted-foreground">404</h1>
+      <h2 className="text-3xl font-bold mt-4">{t("page_not_found")}</h2>
+      <p className="text-muted-foreground mt-2 max-w-md">
+        {t("page_not_found_description")}
+      </p>
+      <Link
+        to="/"
+        className="mt-8 inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+      >
+        {t("back_to_home")}
+      </Link>
     </div>
   );
-}
+};
+
+export default NotFoundPage;

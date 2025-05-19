@@ -1,271 +1,186 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import { Progress } from "../ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { useTranslatedDirection } from "@/hooks/useTranslatedDirection";
-import { Home, User, Calendar, Clock, ArrowRight, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
-interface Assessment {
-  assessmentId: number;
-  assessmentCode: string;
-  seniorCitizenId: number;
-  seniorCitizenName: string;
-  assessmentDate: Date;
-  statusId: number;
-  statusName: string;
-  completionPercentage: number;
-  roomCount: number;
-  completedRooms: number;
-  totalRecommendations: number;
-  selectedRecommendations: number;
-  totalEstimatedCost: number;
-}
-
-interface AssessmentDashboardProps {
-  assessments: Assessment[];
-  onViewAssessment: (assessmentId: number) => void;
-  onCreateAssessment: () => void;
-}
-
-export const AssessmentDashboard: React.FC<AssessmentDashboardProps> = ({
-  assessments = [],
-  onViewAssessment,
-  onCreateAssessment,
-}) => {
-  const { t } = useTranslation();
-  const { directionClass } = useTranslatedDirection();
-
-  const getStatusColor = (statusName: string) => {
-    switch (statusName.toLowerCase()) {
-      case "completed":
-        return "bg-green-500";
-      case "in progress":
-        return "bg-blue-500";
-      case "pending":
-        return "bg-yellow-500";
-      case "cancelled":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString();
-  };
-
-  const pendingAssessments = assessments.filter(
-    (a) =>
-      a.statusName.toLowerCase() === "pending" ||
-      a.statusName.toLowerCase() === "in progress",
-  );
-
-  const completedAssessments = assessments.filter(
-    (a) => a.statusName.toLowerCase() === "completed",
-  );
-
-  return (
-    <div className={`space-y-6 ${directionClass}`}>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">{t("Assessment Dashboard")}</h1>
-        <Button onClick={onCreateAssessment}>
-          <Plus className="mr-2 h-4 w-4" /> {t("New Assessment")}
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">
-              {t("Total Assessments")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{assessments.length}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">
-              {t("Pending Assessments")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">
-              {pendingAssessments.length}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">
-              {t("Completed Assessments")}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">
-              {completedAssessments.length}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Tabs defaultValue="pending">
-        <TabsList className="mb-4">
-          <TabsTrigger value="pending">{t("Pending")}</TabsTrigger>
-          <TabsTrigger value="completed">{t("Completed")}</TabsTrigger>
-          <TabsTrigger value="all">{t("All")}</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="pending" className="space-y-4">
-          {pendingAssessments.length === 0 ? (
-            <Card>
-              <CardContent className="pt-6 text-center text-muted-foreground">
-                {t("No pending assessments found.")}
-              </CardContent>
-            </Card>
-          ) : (
-            pendingAssessments.map((assessment) => (
-              <AssessmentCard
-                key={assessment.assessmentId}
-                assessment={assessment}
-                onViewAssessment={onViewAssessment}
-              />
-            ))
-          )}
-        </TabsContent>
-
-        <TabsContent value="completed" className="space-y-4">
-          {completedAssessments.length === 0 ? (
-            <Card>
-              <CardContent className="pt-6 text-center text-muted-foreground">
-                {t("No completed assessments found.")}
-              </CardContent>
-            </Card>
-          ) : (
-            completedAssessments.map((assessment) => (
-              <AssessmentCard
-                key={assessment.assessmentId}
-                assessment={assessment}
-                onViewAssessment={onViewAssessment}
-              />
-            ))
-          )}
-        </TabsContent>
-
-        <TabsContent value="all" className="space-y-4">
-          {assessments.length === 0 ? (
-            <Card>
-              <CardContent className="pt-6 text-center text-muted-foreground">
-                {t("No assessments found.")}
-              </CardContent>
-            </Card>
-          ) : (
-            assessments.map((assessment) => (
-              <AssessmentCard
-                key={assessment.assessmentId}
-                assessment={assessment}
-                onViewAssessment={onViewAssessment}
-              />
-            ))
-          )}
-        </TabsContent>
-      </Tabs>
-    </div>
-  );
-};
-
-const AssessmentCard: React.FC<{
-  assessment: Assessment;
-  onViewAssessment: (assessmentId: number) => void;
-}> = ({ assessment, onViewAssessment }) => {
+const AssessmentDashboard: React.FC = () => {
   const { t } = useTranslation();
 
-  const getStatusColor = (statusName: string) => {
-    switch (statusName.toLowerCase()) {
-      case "completed":
-        return "bg-green-500";
-      case "in progress":
-        return "bg-blue-500";
-      case "pending":
-        return "bg-yellow-500";
-      case "cancelled":
-        return "bg-red-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
-
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString();
-  };
+  // Mock assessment data
+  const assessments = [
+    {
+      id: 1,
+      beneficiary: "Ahmed Ali",
+      address: "123 Main St, Abu Dhabi",
+      status: "Completed",
+      date: "2023-06-10",
+    },
+    {
+      id: 2,
+      beneficiary: "Fatima Hassan",
+      address: "456 Park Ave, Dubai",
+      status: "In Progress",
+      date: "2023-06-12",
+    },
+    {
+      id: 3,
+      beneficiary: "Mohammed Khalid",
+      address: "789 Oak Rd, Sharjah",
+      status: "Scheduled",
+      date: "2023-06-15",
+    },
+    {
+      id: 4,
+      beneficiary: "Aisha Rahman",
+      address: "321 Pine St, Abu Dhabi",
+      status: "Completed",
+      date: "2023-06-08",
+    },
+    {
+      id: 5,
+      beneficiary: "Omar Saeed",
+      address: "654 Cedar Ln, Dubai",
+      status: "Pending Approval",
+      date: "2023-06-11",
+    },
+  ];
 
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start">
-          <div>
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">{t("assessments")}</h1>
+        <button className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+          {t("new_assessment")}
+        </button>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-4">
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("total_assessments")}
+          </div>
+          <div className="text-2xl font-bold">24</div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("completed")}
+          </div>
+          <div className="text-2xl font-bold">16</div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("in_progress")}
+          </div>
+          <div className="text-2xl font-bold">5</div>
+        </div>
+        <div className="rounded-lg border bg-card p-6 shadow-sm">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t("pending_approval")}
+          </div>
+          <div className="text-2xl font-bold">3</div>
+        </div>
+      </div>
+
+      <div className="rounded-lg border bg-card shadow-sm">
+        <div className="p-4 border-b">
+          <div className="flex items-center gap-4">
+            <input
+              type="text"
+              placeholder={t("search_assessments")}
+              className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            />
+            <select className="flex h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+              <option value="all">{t("all_statuses")}</option>
+              <option value="completed">{t("completed")}</option>
+              <option value="in_progress">{t("in_progress")}</option>
+              <option value="scheduled">{t("scheduled")}</option>
+              <option value="pending_approval">{t("pending_approval")}</option>
+            </select>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b bg-muted/50">
+                <th className="h-10 px-4 text-left align-middle font-medium text-muted-foreground">
+                  {t("id")}
+                </th>
+                <th className="h-10 px-4 text-left align-middle font-medium text-muted-foreground">
+                  {t("beneficiary")}
+                </th>
+                <th className="h-10 px-4 text-left align-middle font-medium text-muted-foreground">
+                  {t("address")}
+                </th>
+                <th className="h-10 px-4 text-left align-middle font-medium text-muted-foreground">
+                  {t("status")}
+                </th>
+                <th className="h-10 px-4 text-left align-middle font-medium text-muted-foreground">
+                  {t("date")}
+                </th>
+                <th className="h-10 px-4 text-right align-middle font-medium text-muted-foreground">
+                  {t("actions")}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {assessments.map((assessment) => (
+                <tr key={assessment.id} className="border-b hover:bg-muted/50">
+                  <td className="p-4 align-middle">{assessment.id}</td>
+                  <td className="p-4 align-middle">{assessment.beneficiary}</td>
+                  <td className="p-4 align-middle">{assessment.address}</td>
+                  <td className="p-4 align-middle">
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        assessment.status === "Completed"
+                          ? "bg-green-100 text-green-800"
+                          : assessment.status === "In Progress"
+                            ? "bg-blue-100 text-blue-800"
+                            : assessment.status === "Scheduled"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-orange-100 text-orange-800"
+                      }`}
+                    >
+                      {assessment.status}
+                    </span>
+                  </td>
+                  <td className="p-4 align-middle">{assessment.date}</td>
+                  <td className="p-4 align-middle text-right">
+                    <div className="flex justify-end gap-2">
+                      <Link
+                        to={`/assessments/${assessment.id}`}
+                        className="inline-flex items-center justify-center rounded-md bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground hover:bg-secondary/80"
+                      >
+                        {t("view")}
+                      </Link>
+                      <button className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:bg-primary/90">
+                        {t("edit")}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="p-4 border-t">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-muted-foreground">
+              {t("showing_results", { start: 1, end: 5, total: 24 })}
+            </div>
             <div className="flex items-center gap-2">
-              <h3 className="font-semibold">{assessment.assessmentCode}</h3>
-              <Badge className={getStatusColor(assessment.statusName)}>
-                {assessment.statusName}
-              </Badge>
-            </div>
-            <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-              <User className="h-4 w-4" />
-              <span>{assessment.seniorCitizenName}</span>
-            </div>
-            <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-              <Calendar className="h-4 w-4" />
-              <span>{formatDate(assessment.assessmentDate)}</span>
-            </div>
-          </div>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onViewAssessment(assessment.assessmentId)}
-          >
-            {t("View")} <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-
-        <div className="mt-4">
-          <div className="flex justify-between items-center mb-1">
-            <span className="text-sm">{t("Completion")}:</span>
-            <span className="text-sm">{assessment.completionPercentage}%</span>
-          </div>
-          <Progress value={assessment.completionPercentage} />
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          <div>
-            <div className="text-sm text-muted-foreground">
-              {t("Rooms Completed")}
-            </div>
-            <div className="font-medium">
-              {assessment.completedRooms} / {assessment.roomCount}
-            </div>
-          </div>
-          <div>
-            <div className="text-sm text-muted-foreground">
-              {t("Estimated Cost")}
-            </div>
-            <div className="font-medium">
-              {assessment.totalEstimatedCost.toLocaleString("en-US", {
-                style: "currency",
-                currency: "SAR",
-              })}
+              <button
+                className="inline-flex items-center justify-center rounded-md border border-input bg-background p-1 text-sm font-medium hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
+                disabled
+              >
+                {t("previous")}
+              </button>
+              <button className="inline-flex items-center justify-center rounded-md border border-input bg-background p-1 text-sm font-medium hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50">
+                {t("next")}
+              </button>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

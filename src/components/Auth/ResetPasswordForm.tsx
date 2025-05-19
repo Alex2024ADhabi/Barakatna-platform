@@ -1,105 +1,107 @@
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Label } from "../ui/label";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link, useSearchParams } from "react-router-dom";
 
-interface ResetPasswordFormProps {
-  token?: string;
-  onSubmit?: (
-    password: string,
-    confirmPassword: string,
-    token?: string,
-  ) => void;
-  onCancel?: () => void;
-}
-
-const ResetPasswordForm = ({
-  token,
-  onSubmit = () => {},
-  onCancel = () => {},
-}: ResetPasswordFormProps) => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+const ResetPasswordForm: React.FC = () => {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Get token from URL
+  const token = searchParams.get("token");
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
-    if (password !== confirmPassword) {
-      setError(t("auth.resetPassword.passwordMismatch"));
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await onSubmit(password, confirmPassword, token);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Password reset logic would go here using the token
+    setSubmitted(true);
   };
 
+  if (!token) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold">{t("invalid_reset_link")}</h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            {t("invalid_reset_link_description")}
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/auth/forgot-password"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            {t("try_again")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (submitted) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold">
+            {t("password_reset_successful")}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-2">
+            {t("password_reset_successful_description")}
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/auth/login"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            {t("login_with_new_password")}
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>{t("auth.resetPassword.title")}</CardTitle>
-        <CardDescription>{t("auth.resetPassword.description")}</CardDescription>
-      </CardHeader>
-      <form onSubmit={handleSubmit}>
-        <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="password">{t("common.newPassword")}</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={8}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="confirmPassword">
-                {t("common.confirmPassword")}
-              </Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                minLength={8}
-              />
-            </div>
-            {error && <p className="text-sm text-red-500">{error}</p>}
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" type="button" onClick={onCancel}>
-            {t("common.cancel")}
-          </Button>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting
-              ? t("common.processing")
-              : t("auth.resetPassword.submit")}
-          </Button>
-        </CardFooter>
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-2xl font-bold">{t("reset_password")}</h2>
+        <p className="text-sm text-muted-foreground mt-2">
+          {t("enter_new_password")}
+        </p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-2">
+          <label htmlFor="password" className="text-sm font-medium">
+            {t("new_password")}
+          </label>
+          <input
+            id="password"
+            type="password"
+            placeholder={t("enter_new_password")}
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            required
+          />
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="confirmPassword" className="text-sm font-medium">
+            {t("confirm_new_password")}
+          </label>
+          <input
+            id="confirmPassword"
+            type="password"
+            placeholder={t("confirm_new_password")}
+            className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        >
+          {t("reset_password")}
+        </button>
       </form>
-    </Card>
+    </div>
   );
 };
 
-export { ResetPasswordForm };
 export default ResetPasswordForm;

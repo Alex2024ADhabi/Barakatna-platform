@@ -21,6 +21,13 @@ export enum FormModule {
   SUPPLIER = "supplier",
   REPORT = "report",
   SETTINGS = "settings",
+  CASE = "case",
+  MANPOWER = "manpower",
+  DRAWING = "drawing",
+  COHORT = "cohort",
+  PRICE_LIST = "price_list",
+  PROGRAM = "program",
+  ADMINISTRATION = "administration",
 }
 
 // Form field types

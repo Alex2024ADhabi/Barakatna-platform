@@ -1,43 +1,48 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useAppContext } from "../App.provider";
 
-// This is a placeholder for the actual MainLayout component
-// In a real implementation, this would include navigation, sidebar, etc.
-export default function MainLayout() {
+const MainLayout: React.FC = () => {
   const { t } = useTranslation();
+  const { theme, clientType } = useAppContext();
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">
-                  Barakatna Platform
-                </h1>
-              </div>
-            </div>
+    <div
+      className={`min-h-screen bg-background ${theme === "dark" ? "dark" : ""}`}
+    >
+      <header className="sticky top-0 z-40 w-full border-b bg-background">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center gap-4">
+            <h1 className="text-xl font-bold">Barakatna Platform</h1>
+            <span className="text-sm text-muted-foreground">{clientType}</span>
           </div>
+          <nav className="flex items-center gap-4">
+            <a href="/" className="text-sm font-medium">
+              {t("dashboard")}
+            </a>
+            <a href="/assessments" className="text-sm font-medium">
+              {t("assessments")}
+            </a>
+            <a href="/committees" className="text-sm font-medium">
+              {t("committees")}
+            </a>
+            <a href="/admin" className="text-sm font-medium">
+              {t("admin")}
+            </a>
+          </nav>
         </div>
       </header>
-
-      {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="container py-6">
         <Outlet />
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white shadow mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <p className="text-center text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Barakatna Platform. All rights
-            reserved.
-          </p>
+      <footer className="border-t bg-background py-4">
+        <div className="container text-center text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} Barakatna Platform
         </div>
       </footer>
     </div>
   );
-}
+};
+
+export default MainLayout;

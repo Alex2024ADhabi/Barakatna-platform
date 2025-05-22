@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { FormModule } from "@/lib/forms/types";
 import { Button } from "@/components/ui/button";
 import { Search, FileText, Eye } from "lucide-react";
-import { useRouter } from "next/router";
+//  import { useRouter } from "next/router";
 
 interface FormRegistryProps {
   onSelectForm?: (formId: string) => void;
@@ -21,7 +21,7 @@ interface FormRegistryProps {
 const FormRegistry: React.FC<FormRegistryProps> = ({ onSelectForm }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState<string>("all");
-  const router = useRouter();
+  // const router = useRouter();
 
   const forms = formRegistry.getAllForms();
 
@@ -40,7 +40,7 @@ const FormRegistry: React.FC<FormRegistryProps> = ({ onSelectForm }) => {
     if (onSelectForm) {
       onSelectForm(formId);
     } else {
-      router.push(`/forms/${formId}`);
+      // router.push(`/forms/${formId}`);
     }
   };
 

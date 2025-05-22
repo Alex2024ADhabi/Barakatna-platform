@@ -656,6 +656,9 @@ const budgetRevisionEntry: FormRegistryEntry = {
 };
 
 // Register all forms
-formRegistry.registerForm(budgetPlanningEntry, budgetPlanningMetadata);
-formRegistry.registerForm(budgetAllocationEntry, budgetAllocationMetadata);
-formRegistry.registerForm(budgetRevisionEntry, budgetRevisionMetadata);
+export function registerbudgetform() {
+  formRegistry.registerForm(budgetPlanningEntry, budgetPlanningMetadata);
+  formRegistry.registerForm(budgetAllocationEntry, budgetAllocationMetadata);
+  formRegistry.registerForm(budgetRevisionEntry, budgetRevisionMetadata);
+}
+

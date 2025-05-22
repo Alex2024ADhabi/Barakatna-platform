@@ -679,19 +679,22 @@ export const priceAdjustment: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: priceAdjustment.id,
-    title: priceAdjustment.title,
-    description: priceAdjustment.description,
-    module: FormModule.PRICE_LIST,
-    clientTypes: priceAdjustment.clientTypes,
-    permissions: priceAdjustment.permissions,
-    dependencies: priceAdjustment.dependencies,
-    version: priceAdjustment.version,
-    path: "/price-list/adjustment",
-    icon: "dollar-sign",
-    isActive: true,
-  },
-  priceAdjustment,
-);
+export function registerpriceAdjustment() {
+
+  formRegistry.registerForm(
+    {
+      id: priceAdjustment.id,
+      title: priceAdjustment.title,
+      description: priceAdjustment.description,
+      module: FormModule.PRICE_LIST,
+      clientTypes: priceAdjustment.clientTypes,
+      permissions: priceAdjustment.permissions,
+      dependencies: priceAdjustment.dependencies,
+      version: priceAdjustment.version,
+      path: "/price-list/adjustment",
+      icon: "dollar-sign",
+      isActive: true,
+    },
+    priceAdjustment,
+  );
+}

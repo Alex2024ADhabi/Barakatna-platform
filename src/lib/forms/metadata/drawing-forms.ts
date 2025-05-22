@@ -986,36 +986,42 @@ export const finalInspection: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: drawingApproval.id,
-    title: drawingApproval.title,
-    description: drawingApproval.description,
-    module: FormModule.DRAWING,
-    clientTypes: drawingApproval.clientTypes,
-    permissions: drawingApproval.permissions,
-    dependencies: drawingApproval.dependencies,
-    version: drawingApproval.version,
-    path: "/drawing/approval",
-    icon: "file-check",
-    isActive: true,
-  },
-  drawingApproval,
-);
+export function registerdrawingApproval() {
+  formRegistry.registerForm(
+    {
+      id: drawingApproval.id,
+      title: drawingApproval.title,
+      description: drawingApproval.description,
+      module: FormModule.DRAWING,
+      clientTypes: drawingApproval.clientTypes,
+      permissions: drawingApproval.permissions,
+      dependencies: drawingApproval.dependencies,
+      version: drawingApproval.version,
+      path: "/drawing/approval",
+      icon: "file-check",
+      isActive: true,
+    },
+    drawingApproval,
+  );
+}
 
-formRegistry.registerForm(
-  {
-    id: finalInspection.id,
-    title: finalInspection.title,
-    description: finalInspection.description,
-    module: FormModule.DRAWING,
-    clientTypes: finalInspection.clientTypes,
-    permissions: finalInspection.permissions,
-    dependencies: finalInspection.dependencies,
-    version: finalInspection.version,
-    path: "/drawing/inspection",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  finalInspection,
-);
+
+export function registerfinalInspection() {
+  formRegistry.registerForm(
+    {
+      id: finalInspection.id,
+      title: finalInspection.title,
+      description: finalInspection.description,
+      module: FormModule.DRAWING,
+      clientTypes: finalInspection.clientTypes,
+      permissions: finalInspection.permissions,
+      dependencies: finalInspection.dependencies,
+      version: finalInspection.version,
+      path: "/drawing/inspection",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    finalInspection,
+  );
+
+}

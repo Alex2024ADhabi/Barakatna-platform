@@ -1169,53 +1169,63 @@ export const clientSupplierAgreementForm: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: clientProfileForm.id,
-    title: clientProfileForm.title,
-    description: clientProfileForm.description,
-    module: clientProfileForm.module,
-    clientTypes: clientProfileForm.clientTypes,
-    permissions: clientProfileForm.permissions,
-    dependencies: clientProfileForm.dependencies,
-    version: clientProfileForm.version,
-    path: "/clients/profile",
-    icon: "building",
-    isActive: true,
-  },
-  clientProfileForm,
-);
+export function registerclientProfileForm() {
+  formRegistry.registerForm(
+    {
+      id: clientProfileForm.id,
+      title: clientProfileForm.title,
+      description: clientProfileForm.description,
+      module: clientProfileForm.module,
+      clientTypes: clientProfileForm.clientTypes,
+      permissions: clientProfileForm.permissions,
+      dependencies: clientProfileForm.dependencies,
+      version: clientProfileForm.version,
+      path: "/clients/profile",
+      icon: "building",
+      isActive: true,
+    },
+    clientProfileForm,
+  );
 
-formRegistry.registerForm(
-  {
-    id: clientRegistrationForm.id,
-    title: clientRegistrationForm.title,
-    description: clientRegistrationForm.description,
-    module: clientRegistrationForm.module,
-    clientTypes: clientRegistrationForm.clientTypes,
-    permissions: clientRegistrationForm.permissions,
-    dependencies: clientRegistrationForm.dependencies,
-    version: clientRegistrationForm.version,
-    path: "/clients/register",
-    icon: "building-2",
-    isActive: true,
-  },
-  clientRegistrationForm,
-);
 
-formRegistry.registerForm(
-  {
-    id: clientSupplierAgreementForm.id,
-    title: clientSupplierAgreementForm.title,
-    description: clientSupplierAgreementForm.description,
-    module: clientSupplierAgreementForm.module,
-    clientTypes: clientSupplierAgreementForm.clientTypes,
-    permissions: clientSupplierAgreementForm.permissions,
-    dependencies: clientSupplierAgreementForm.dependencies,
-    version: clientSupplierAgreementForm.version,
-    path: "/clients/supplier-agreements",
-    icon: "file-contract",
-    isActive: true,
-  },
-  clientSupplierAgreementForm,
-);
+}
+
+export function registerclientRegistrationForm() {
+  formRegistry.registerForm(
+    {
+      id: clientRegistrationForm.id,
+      title: clientRegistrationForm.title,
+      description: clientRegistrationForm.description,
+      module: clientRegistrationForm.module,
+      clientTypes: clientRegistrationForm.clientTypes,
+      permissions: clientRegistrationForm.permissions,
+      dependencies: clientRegistrationForm.dependencies,
+      version: clientRegistrationForm.version,
+      path: "/clients/register",
+      icon: "building-2",
+      isActive: true,
+    },
+    clientRegistrationForm,
+  );
+
+}
+
+export function registerclientSupplierAgreementForm() {
+  formRegistry.registerForm(
+    {
+      id: clientSupplierAgreementForm.id,
+      title: clientSupplierAgreementForm.title,
+      description: clientSupplierAgreementForm.description,
+      module: clientSupplierAgreementForm.module,
+      clientTypes: clientSupplierAgreementForm.clientTypes,
+      permissions: clientSupplierAgreementForm.permissions,
+      dependencies: clientSupplierAgreementForm.dependencies,
+      version: clientSupplierAgreementForm.version,
+      path: "/clients/supplier-agreements",
+      icon: "file-contract",
+      isActive: true,
+    },
+    clientSupplierAgreementForm,
+  );
+
+}

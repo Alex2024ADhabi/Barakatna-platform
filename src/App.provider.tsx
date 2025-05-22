@@ -14,7 +14,7 @@ interface AppContextType {
 const defaultContext: AppContextType = {
   theme: "light",
   setTheme: () => {},
-  language: "en",
+  language: "er",
   setLanguage: () => {},
   isAuthenticated: false,
   setIsAuthenticated: () => {},

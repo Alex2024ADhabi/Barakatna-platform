@@ -1174,14 +1174,18 @@ const auditLogEntry: FormRegistryEntry = {
 };
 
 // Register all forms
-formRegistry.registerForm(userManagementEntry, userManagementMetadata);
-formRegistry.registerForm(roleManagementEntry, roleManagementMetadata);
-formRegistry.registerForm(
-  permissionManagementEntry,
-  permissionManagementMetadata,
-);
-formRegistry.registerForm(
-  systemConfigurationEntry,
-  systemConfigurationMetadata,
-);
-formRegistry.registerForm(auditLogEntry, auditLogMetadata);
+export function registeradminform() {
+  formRegistry.registerForm(userManagementEntry, userManagementMetadata);
+  formRegistry.registerForm(roleManagementEntry, roleManagementMetadata);
+  formRegistry.registerForm(
+    permissionManagementEntry,
+    permissionManagementMetadata,
+  );
+  formRegistry.registerForm(
+    systemConfigurationEntry,
+    systemConfigurationMetadata,
+  );
+  formRegistry.registerForm(auditLogEntry, auditLogMetadata);
+
+
+}

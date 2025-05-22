@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Input } from "@/components/ui/input";
-import { Loader2, Users, Settings, FileText, Plus } from "lucide-react";
+import { Loader2, Users, Settings, FileText, Plus, Shield } from "lucide-react";
 import { clientConfigService } from "@/services/clientConfigService";
 import ClientTypeManager from "./ClientTypeManager";
 import ClientRegistrationForm from "./ClientRegistrationForm";

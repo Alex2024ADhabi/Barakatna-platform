@@ -714,19 +714,23 @@ export const supplierPerformance: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: supplierPerformance.id,
-    title: supplierPerformance.title,
-    description: supplierPerformance.description,
-    module: FormModule.SUPPLIER,
-    clientTypes: supplierPerformance.clientTypes,
-    permissions: supplierPerformance.permissions,
-    dependencies: supplierPerformance.dependencies,
-    version: supplierPerformance.version,
-    path: "/supplier/performance",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  supplierPerformance,
-);
+export function registersupplierPerformance() {
+  formRegistry.registerForm(
+    {
+      id: supplierPerformance.id,
+      title: supplierPerformance.title,
+      description: supplierPerformance.description,
+      module: FormModule.SUPPLIER,
+      clientTypes: supplierPerformance.clientTypes,
+      permissions: supplierPerformance.permissions,
+      dependencies: supplierPerformance.dependencies,
+      version: supplierPerformance.version,
+      path: "/supplier/performance",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    supplierPerformance,
+  );
+
+
+}

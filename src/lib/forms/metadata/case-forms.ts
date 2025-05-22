@@ -775,6 +775,9 @@ const caseUpdateEntry: FormRegistryEntry = {
 };
 
 // Register all forms
-formRegistry.registerForm(caseCreationEntry, caseCreationMetadata);
-formRegistry.registerForm(caseAssignmentEntry, caseAssignmentMetadata);
-formRegistry.registerForm(caseUpdateEntry, caseUpdateMetadata);
+export function registercaseform() {
+  formRegistry.registerForm(caseCreationEntry, caseCreationMetadata);
+  formRegistry.registerForm(caseAssignmentEntry, caseAssignmentMetadata);
+  formRegistry.registerForm(caseUpdateEntry, caseUpdateMetadata);
+}
+

@@ -806,53 +806,60 @@ export const committeeMemberAssignmentForm: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: committeeMeetingForm.id,
-    title: committeeMeetingForm.title,
-    description: committeeMeetingForm.description,
-    module: committeeMeetingForm.module,
-    clientTypes: committeeMeetingForm.clientTypes,
-    permissions: committeeMeetingForm.permissions,
-    dependencies: committeeMeetingForm.dependencies,
-    version: committeeMeetingForm.version,
-    path: "/committee/meetings",
-    icon: "users",
-    isActive: true,
-  },
-  committeeMeetingForm,
-);
+export function registercommitteeMeetingForm() {
+  formRegistry.registerForm(
+    {
+      id: committeeMeetingForm.id,
+      title: committeeMeetingForm.title,
+      description: committeeMeetingForm.description,
+      module: committeeMeetingForm.module,
+      clientTypes: committeeMeetingForm.clientTypes,
+      permissions: committeeMeetingForm.permissions,
+      dependencies: committeeMeetingForm.dependencies,
+      version: committeeMeetingForm.version,
+      path: "/committee/meetings",
+      icon: "users",
+      isActive: true,
+    },
+    committeeMeetingForm,
+  );
+}
 
-formRegistry.registerForm(
-  {
-    id: committeeDecisionForm.id,
-    title: committeeDecisionForm.title,
-    description: committeeDecisionForm.description,
-    module: committeeDecisionForm.module,
-    clientTypes: committeeDecisionForm.clientTypes,
-    permissions: committeeDecisionForm.permissions,
-    dependencies: committeeDecisionForm.dependencies,
-    version: committeeDecisionForm.version,
-    path: "/committee/decisions",
-    icon: "check-square",
-    isActive: true,
-  },
-  committeeDecisionForm,
-);
+export function registercommitteeDecisionForm() {
+  formRegistry.registerForm(
+    {
+      id: committeeDecisionForm.id,
+      title: committeeDecisionForm.title,
+      description: committeeDecisionForm.description,
+      module: committeeDecisionForm.module,
+      clientTypes: committeeDecisionForm.clientTypes,
+      permissions: committeeDecisionForm.permissions,
+      dependencies: committeeDecisionForm.dependencies,
+      version: committeeDecisionForm.version,
+      path: "/committee/decisions",
+      icon: "check-square",
+      isActive: true,
+    },
+    committeeDecisionForm,
+  );
+}
 
-formRegistry.registerForm(
-  {
-    id: committeeMemberAssignmentForm.id,
-    title: committeeMemberAssignmentForm.title,
-    description: committeeMemberAssignmentForm.description,
-    module: committeeMemberAssignmentForm.module,
-    clientTypes: committeeMemberAssignmentForm.clientTypes,
-    permissions: committeeMemberAssignmentForm.permissions,
-    dependencies: committeeMemberAssignmentForm.dependencies,
-    version: committeeMemberAssignmentForm.version,
-    path: "/committee/members",
-    icon: "user-plus",
-    isActive: true,
-  },
-  committeeMemberAssignmentForm,
-);
+export function registercommitteeMemberAssignmentForm() {
+  formRegistry.registerForm(
+    {
+      id: committeeMemberAssignmentForm.id,
+      title: committeeMemberAssignmentForm.title,
+      description: committeeMemberAssignmentForm.description,
+      module: committeeMemberAssignmentForm.module,
+      clientTypes: committeeMemberAssignmentForm.clientTypes,
+      permissions: committeeMemberAssignmentForm.permissions,
+      dependencies: committeeMemberAssignmentForm.dependencies,
+      version: committeeMemberAssignmentForm.version,
+      path: "/committee/members",
+      icon: "user-plus",
+      isActive: true,
+    },
+    committeeMemberAssignmentForm,
+  );
+
+}

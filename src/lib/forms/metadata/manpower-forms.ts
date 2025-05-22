@@ -1036,36 +1036,41 @@ export const manpowerAllocation: FormMetadata = {
 };
 
 // Register forms with the form registry
-formRegistry.registerForm(
-  {
-    id: contractorPerformanceEvaluation.id,
-    title: contractorPerformanceEvaluation.title,
-    description: contractorPerformanceEvaluation.description,
-    module: FormModule.MANPOWER,
-    clientTypes: contractorPerformanceEvaluation.clientTypes,
-    permissions: contractorPerformanceEvaluation.permissions,
-    dependencies: contractorPerformanceEvaluation.dependencies,
-    version: contractorPerformanceEvaluation.version,
-    path: "/manpower/contractor-evaluation",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  contractorPerformanceEvaluation,
-);
+export function registercontractorPerformanceEvaluation() {
+  formRegistry.registerForm(
+    {
+      id: contractorPerformanceEvaluation.id,
+      title: contractorPerformanceEvaluation.title,
+      description: contractorPerformanceEvaluation.description,
+      module: FormModule.MANPOWER,
+      clientTypes: contractorPerformanceEvaluation.clientTypes,
+      permissions: contractorPerformanceEvaluation.permissions,
+      dependencies: contractorPerformanceEvaluation.dependencies,
+      version: contractorPerformanceEvaluation.version,
+      path: "/manpower/contractor-evaluation",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    contractorPerformanceEvaluation,
+  );
+}
 
-formRegistry.registerForm(
-  {
-    id: manpowerAllocation.id,
-    title: manpowerAllocation.title,
-    description: manpowerAllocation.description,
-    module: FormModule.MANPOWER,
-    clientTypes: manpowerAllocation.clientTypes,
-    permissions: manpowerAllocation.permissions,
-    dependencies: manpowerAllocation.dependencies,
-    version: manpowerAllocation.version,
-    path: "/manpower/allocation",
-    icon: "users",
-    isActive: true,
-  },
-  manpowerAllocation,
-);
+export function registermanpowerAllocation() {
+  formRegistry.registerForm(
+    {
+      id: manpowerAllocation.id,
+      title: manpowerAllocation.title,
+      description: manpowerAllocation.description,
+      module: FormModule.MANPOWER,
+      clientTypes: manpowerAllocation.clientTypes,
+      permissions: manpowerAllocation.permissions,
+      dependencies: manpowerAllocation.dependencies,
+      version: manpowerAllocation.version,
+      path: "/manpower/allocation",
+      icon: "users",
+      isActive: true,
+    },
+    manpowerAllocation,
+  );
+}
+

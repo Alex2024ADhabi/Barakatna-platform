@@ -19,7 +19,7 @@ const LoginForm: React.FC = () => {
       <div>
         <h2 className="text-2xl font-bold">{t("login")}</h2>
         <p className="text-sm text-muted-foreground">
-          {t("enter_credentials")}
+          {t("enter credentials")}
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
           <input
             id="username"
             type="text"
-            placeholder={t("enter_username")}
+            placeholder={t("enter username")}
             className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             required
           />
@@ -44,13 +44,13 @@ const LoginForm: React.FC = () => {
               to="/auth/forgot-password"
               className="text-xs text-primary hover:underline"
             >
-              {t("forgot_password")}
+              {t("forgot password")}
             </Link>
           </div>
           <input
             id="password"
             type="password"
-            placeholder={t("enter_password")}
+            placeholder={t("enter password")}
             className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             required
           />
@@ -62,7 +62,7 @@ const LoginForm: React.FC = () => {
             className="h-4 w-4 rounded border border-input bg-transparent shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           />
           <label htmlFor="remember" className="text-sm font-medium">
-            {t("remember_me")}
+            {t("remember me")}
           </label>
         </div>
         <button
@@ -73,7 +73,7 @@ const LoginForm: React.FC = () => {
         </button>
       </form>
       <div className="text-center text-sm">
-        <span className="text-muted-foreground">{t("dont_have_account")} </span>
+        <span className="text-muted-foreground">{t("dont have account")} </span>
         <Link to="/auth/register" className="text-primary hover:underline">
           {t("register")}
         </Link>

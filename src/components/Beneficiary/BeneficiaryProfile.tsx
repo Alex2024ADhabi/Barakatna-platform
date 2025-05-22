@@ -42,6 +42,9 @@ export default function BeneficiaryProfile({
             <p>
               <span className="font-medium">Client Type:</span> FDF
             </p>
+              <p>
+              <span className="font-medium">Cohort:</span> 1
+            </p>
             <p>
               <span className="font-medium">Assessment Date:</span> October 10,
               2023

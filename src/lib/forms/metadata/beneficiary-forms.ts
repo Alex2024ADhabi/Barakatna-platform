@@ -697,19 +697,21 @@ export const beneficiaryRegistrationForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: beneficiaryRegistrationForm.id,
-    title: beneficiaryRegistrationForm.title,
-    description: beneficiaryRegistrationForm.description,
-    module: FormModule.BENEFICIARY,
-    clientTypes: beneficiaryRegistrationForm.clientTypes,
-    permissions: beneficiaryRegistrationForm.permissions,
-    dependencies: beneficiaryRegistrationForm.dependencies,
-    version: beneficiaryRegistrationForm.version,
-    path: "/beneficiary/registration",
-    icon: "user",
-    isActive: true,
-  },
-  beneficiaryRegistrationForm,
-);
+export function registerBeneficiaryForm() {
+  formRegistry.registerForm(
+    {
+      id: beneficiaryRegistrationForm.id,
+      title: beneficiaryRegistrationForm.title,
+      description: beneficiaryRegistrationForm.description,
+      module: FormModule.BENEFICIARY,
+      clientTypes: beneficiaryRegistrationForm.clientTypes,
+      permissions: beneficiaryRegistrationForm.permissions,
+      dependencies: beneficiaryRegistrationForm.dependencies,
+      version: beneficiaryRegistrationForm.version,
+      path: "/beneficiary/registration",
+      icon: "user",
+      isActive: true,
+    },
+    beneficiaryRegistrationForm,
+  );
+}

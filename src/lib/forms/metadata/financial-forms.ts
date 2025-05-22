@@ -1531,8 +1531,11 @@ const auditTrailEntry: FormRegistryEntry = {
 };
 
 // Register all forms
-formRegistry.registerForm(expenseTrackingEntry, expenseTrackingMetadata);
-formRegistry.registerForm(invoiceManagementEntry, invoiceManagementMetadata);
-formRegistry.registerForm(paymentProcessingEntry, paymentProcessingMetadata);
-formRegistry.registerForm(financialReportingEntry, financialReportingMetadata);
-formRegistry.registerForm(auditTrailEntry, auditTrailMetadata);
+export function registerfinancialforms() {
+  formRegistry.registerForm(expenseTrackingEntry, expenseTrackingMetadata);
+  formRegistry.registerForm(invoiceManagementEntry, invoiceManagementMetadata);
+  formRegistry.registerForm(paymentProcessingEntry, paymentProcessingMetadata);
+  formRegistry.registerForm(financialReportingEntry, financialReportingMetadata);
+  formRegistry.registerForm(auditTrailEntry, auditTrailMetadata);
+
+}

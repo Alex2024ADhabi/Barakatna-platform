@@ -626,5 +626,8 @@ const stockTransactionEntry: FormRegistryEntry = {
 };
 
 // Register all forms
-formRegistry.registerForm(inventoryItemEntry, inventoryItemMetadata);
-formRegistry.registerForm(stockTransactionEntry, stockTransactionMetadata);
+export function registerinventoryform() {
+  formRegistry.registerForm(inventoryItemEntry, inventoryItemMetadata);
+  formRegistry.registerForm(stockTransactionEntry, stockTransactionMetadata);
+}
+

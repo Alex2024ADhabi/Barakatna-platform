@@ -667,19 +667,22 @@ export const clientFeedbackForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: clientFeedbackForm.id,
-    title: clientFeedbackForm.title,
-    description: clientFeedbackForm.description,
-    module: FormModule.CLIENT,
-    clientTypes: clientFeedbackForm.clientTypes,
-    permissions: clientFeedbackForm.permissions,
-    dependencies: clientFeedbackForm.dependencies,
-    version: clientFeedbackForm.version,
-    path: "/client/feedback",
-    icon: "message-square",
-    isActive: true,
-  },
-  clientFeedbackForm,
-);
+export function registerclientFeedbackForm() {
+  formRegistry.registerForm(
+    {
+      id: clientFeedbackForm.id,
+      title: clientFeedbackForm.title,
+      description: clientFeedbackForm.description,
+      module: FormModule.CLIENT,
+      clientTypes: clientFeedbackForm.clientTypes,
+      permissions: clientFeedbackForm.permissions,
+      dependencies: clientFeedbackForm.dependencies,
+      version: clientFeedbackForm.version,
+      path: "/client/feedback",
+      icon: "message-square",
+      isActive: true,
+    },
+    clientFeedbackForm,
+  );
+
+}

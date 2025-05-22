@@ -856,19 +856,22 @@ export const beneficiaryQualificationForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: beneficiaryQualificationForm.id,
-    title: beneficiaryQualificationForm.title,
-    description: beneficiaryQualificationForm.description,
-    module: FormModule.BENEFICIARY,
-    clientTypes: beneficiaryQualificationForm.clientTypes,
-    permissions: beneficiaryQualificationForm.permissions,
-    dependencies: beneficiaryQualificationForm.dependencies,
-    version: beneficiaryQualificationForm.version,
-    path: "/beneficiary/qualification",
-    icon: "check-circle",
-    isActive: true,
-  },
-  beneficiaryQualificationForm,
-);
+export function registerBeneficiaryQualificationForm() {
+  formRegistry.registerForm(
+    {
+      id: beneficiaryQualificationForm.id,
+      title: beneficiaryQualificationForm.title,
+      description: beneficiaryQualificationForm.description,
+      module: FormModule.BENEFICIARY,
+      clientTypes: beneficiaryQualificationForm.clientTypes,
+      permissions: beneficiaryQualificationForm.permissions,
+      dependencies: beneficiaryQualificationForm.dependencies,
+      version: beneficiaryQualificationForm.version,
+      path: "/beneficiary/qualification",
+      icon: "check-circle",
+      isActive: true,
+    },
+    beneficiaryQualificationForm,
+  );
+
+}

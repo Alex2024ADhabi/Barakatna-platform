@@ -45,6 +45,11 @@ import AdminDashboard from "./components/Administration/AdminDashboard";
 import UserManagement from "./components/Administration/UserManagement";
 import SystemConfiguration from "./components/Administration/SystemConfiguration";
 
+import { FinancialModuleDashboard } from "./components/Financial";
+import SupplierManagement from "./components/Suppliers/SupplierManagement";
+import CohortManagementDashboard from "./components/Cohort/CohortManagementDashboard";
+import PriceListManagement from "./components/PriceList/PriceListManagement";
+
 // Error pages
 import NotFoundPage from "./components/ErrorPages/NotFoundPage";
 
@@ -58,7 +63,7 @@ export const routes: RouteObject[] = [
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      { path: "login", element: <LoginForm /> },
+      { index: true , element: <LoginForm /> },
       { path: "register", element: <RegistrationForm /> },
       { path: "forgot-password", element: <ForgotPasswordForm /> },
       { path: "reset-password", element: <ResetPasswordForm /> },
@@ -72,9 +77,48 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <DashboardOverview /> },
 
-      // Dashboard routes
-      { path: "dashboard", element: <DashboardOverview /> },
-
+      // PriceListManagement routes
+      {
+        path: "pricelist",
+        children: [
+          { index: true, element: <PriceListManagement /> },
+        ],
+      },
+      // Cohort routes
+      {
+        path: "cohort",
+        children: [
+          { index: true, element: <CohortManagementDashboard /> },
+        ],
+      },
+      // Supplier routes
+      {
+        path: "supplier",
+        children: [
+          { index: true, element: <SupplierManagement /> },
+        ],
+      },
+      // Budget routes
+      {
+        path: "budget",
+        children: [
+          { index: true, element: <BudgetManagementDashboard /> },
+        ],
+      },
+      // Beneficiary routes
+      {
+        path: "beneficiary",
+        children: [
+          { index: true, element: <BeneficiaryManagementDashboard /> },
+        ],
+      },
+      // Financial routes
+      {
+        path: "financial",
+        children: [
+          { index: true, element: <FinancialModuleDashboard /> },
+        ],
+      },
       // Committee routes
       {
         path: "committees",
@@ -160,7 +204,7 @@ export const routes: RouteObject[] = [
 export function getRoutePath(name: string): string {
   const routeMap: Record<string, string> = {
     home: "/",
-    dashboard: "/dashboard",
+    financial: "/financial",
     committees: "/committees",
     committee: "/committees/:committeeId",
     submission: "/committees/submissions/:submissionId",

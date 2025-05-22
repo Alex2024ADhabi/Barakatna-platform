@@ -448,19 +448,23 @@ export const committeeDecisionForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: committeeDecisionForm.id,
-    title: committeeDecisionForm.title,
-    description: committeeDecisionForm.description,
-    module: committeeDecisionForm.module,
-    clientTypes: committeeDecisionForm.clientTypes,
-    permissions: committeeDecisionForm.permissions,
-    dependencies: committeeDecisionForm.dependencies,
-    version: committeeDecisionForm.version,
-    path: "/committee/decisions",
-    icon: "check-circle",
-    isActive: true,
-  },
-  committeeDecisionForm,
-);
+export function registercommitteeDecisionForm() {
+
+  formRegistry.registerForm(
+    {
+      id: committeeDecisionForm.id,
+      title: committeeDecisionForm.title,
+      description: committeeDecisionForm.description,
+      module: committeeDecisionForm.module,
+      clientTypes: committeeDecisionForm.clientTypes,
+      permissions: committeeDecisionForm.permissions,
+      dependencies: committeeDecisionForm.dependencies,
+      version: committeeDecisionForm.version,
+      path: "/committee/decisions",
+      icon: "check-circle",
+      isActive: true,
+    },
+    committeeDecisionForm,
+  );
+
+}

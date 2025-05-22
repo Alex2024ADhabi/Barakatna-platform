@@ -383,19 +383,23 @@ export const caseClosure: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: caseClosure.id,
-    title: caseClosure.title,
-    description: caseClosure.description,
-    module: FormModule.CASE,
-    clientTypes: caseClosure.clientTypes,
-    permissions: caseClosure.permissions,
-    dependencies: caseClosure.dependencies,
-    version: caseClosure.version,
-    path: "/case/closure",
-    icon: "file-check",
-    isActive: true,
-  },
-  caseClosure,
-);
+export function registercaseClosure() {
+  formRegistry.registerForm(
+    {
+      id: caseClosure.id,
+      title: caseClosure.title,
+      description: caseClosure.description,
+      module: FormModule.CASE,
+      clientTypes: caseClosure.clientTypes,
+      permissions: caseClosure.permissions,
+      dependencies: caseClosure.dependencies,
+      version: caseClosure.version,
+      path: "/case/closure",
+      icon: "file-check",
+      isActive: true,
+    },
+    caseClosure,
+  );
+
+}
+

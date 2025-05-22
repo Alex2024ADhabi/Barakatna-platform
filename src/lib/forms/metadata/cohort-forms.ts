@@ -833,19 +833,22 @@ export const cohortCompletionReport: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: cohortCompletionReport.id,
-    title: cohortCompletionReport.title,
-    description: cohortCompletionReport.description,
-    module: FormModule.COHORT,
-    clientTypes: cohortCompletionReport.clientTypes,
-    permissions: cohortCompletionReport.permissions,
-    dependencies: cohortCompletionReport.dependencies,
-    version: cohortCompletionReport.version,
-    path: "/cohort/completion-report",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  cohortCompletionReport,
-);
+export function registercohortCompletionReport() {
+  formRegistry.registerForm(
+    {
+      id: cohortCompletionReport.id,
+      title: cohortCompletionReport.title,
+      description: cohortCompletionReport.description,
+      module: FormModule.COHORT,
+      clientTypes: cohortCompletionReport.clientTypes,
+      permissions: cohortCompletionReport.permissions,
+      dependencies: cohortCompletionReport.dependencies,
+      version: cohortCompletionReport.version,
+      path: "/cohort/completion-report",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    cohortCompletionReport,
+  );
+
+}

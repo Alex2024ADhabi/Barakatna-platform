@@ -497,19 +497,22 @@ export const beneficiaryAssessmentEligibilityForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: beneficiaryAssessmentEligibilityForm.id,
-    title: beneficiaryAssessmentEligibilityForm.title,
-    description: beneficiaryAssessmentEligibilityForm.description,
-    module: FormModule.ASSESSMENT,
-    clientTypes: beneficiaryAssessmentEligibilityForm.clientTypes,
-    permissions: beneficiaryAssessmentEligibilityForm.permissions,
-    dependencies: beneficiaryAssessmentEligibilityForm.dependencies,
-    version: beneficiaryAssessmentEligibilityForm.version,
-    path: "/assessment/eligibility",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  beneficiaryAssessmentEligibilityForm,
-);
+export function registerAssessmentEligibilityForm() {
+  formRegistry.registerForm(
+    {
+      id: beneficiaryAssessmentEligibilityForm.id,
+      title: beneficiaryAssessmentEligibilityForm.title,
+      description: beneficiaryAssessmentEligibilityForm.description,
+      module: FormModule.ASSESSMENT,
+      clientTypes: beneficiaryAssessmentEligibilityForm.clientTypes,
+      permissions: beneficiaryAssessmentEligibilityForm.permissions,
+      dependencies: beneficiaryAssessmentEligibilityForm.dependencies,
+      version: beneficiaryAssessmentEligibilityForm.version,
+      path: "/assessment/eligibility",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    beneficiaryAssessmentEligibilityForm,
+  );
+
+}

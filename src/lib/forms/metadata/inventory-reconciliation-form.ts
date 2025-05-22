@@ -599,19 +599,22 @@ export const inventoryReconciliationForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: inventoryReconciliationForm.id,
-    title: inventoryReconciliationForm.title,
-    description: inventoryReconciliationForm.description,
-    module: inventoryReconciliationForm.module,
-    clientTypes: inventoryReconciliationForm.clientTypes,
-    permissions: inventoryReconciliationForm.permissions,
-    dependencies: inventoryReconciliationForm.dependencies,
-    version: inventoryReconciliationForm.version,
-    path: "/inventory/reconciliation",
-    icon: "clipboard-check",
-    isActive: true,
-  },
-  inventoryReconciliationForm,
-);
+export function registerinventoryReconciliationForm() {
+  formRegistry.registerForm(
+    {
+      id: inventoryReconciliationForm.id,
+      title: inventoryReconciliationForm.title,
+      description: inventoryReconciliationForm.description,
+      module: inventoryReconciliationForm.module,
+      clientTypes: inventoryReconciliationForm.clientTypes,
+      permissions: inventoryReconciliationForm.permissions,
+      dependencies: inventoryReconciliationForm.dependencies,
+      version: inventoryReconciliationForm.version,
+      path: "/inventory/reconciliation",
+      icon: "clipboard-check",
+      isActive: true,
+    },
+    inventoryReconciliationForm,
+  );
+
+}

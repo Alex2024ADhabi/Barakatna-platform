@@ -772,19 +772,22 @@ export const clientServiceAgreementForm: FormMetadata = {
 };
 
 // Register form with the form registry
-formRegistry.registerForm(
-  {
-    id: clientServiceAgreementForm.id,
-    title: clientServiceAgreementForm.title,
-    description: clientServiceAgreementForm.description,
-    module: FormModule.CLIENT,
-    clientTypes: clientServiceAgreementForm.clientTypes,
-    permissions: clientServiceAgreementForm.permissions,
-    dependencies: clientServiceAgreementForm.dependencies,
-    version: clientServiceAgreementForm.version,
-    path: "/client/service-agreement",
-    icon: "file-contract",
-    isActive: true,
-  },
-  clientServiceAgreementForm,
-);
+export function registerclientServiceAgreementForm() {
+  formRegistry.registerForm(
+    {
+      id: clientServiceAgreementForm.id,
+      title: clientServiceAgreementForm.title,
+      description: clientServiceAgreementForm.description,
+      module: FormModule.CLIENT,
+      clientTypes: clientServiceAgreementForm.clientTypes,
+      permissions: clientServiceAgreementForm.permissions,
+      dependencies: clientServiceAgreementForm.dependencies,
+      version: clientServiceAgreementForm.version,
+      path: "/client/service-agreement",
+      icon: "file-contract",
+      isActive: true,
+    },
+    clientServiceAgreementForm,
+  );
+}
+

@@ -21,7 +21,13 @@ const MainLayout: React.FC = () => {
             <a href="/" className="text-sm font-medium">
               {t("dashboard")}
             </a>
-            <a href="/beneficiary" className="text-sm font-medium">
+            <a href="/procurement" className="text-sm font-medium">
+              {t("procurement")}
+            </a>
+             <a href="/manpower" className="text-sm font-medium">
+              {t("manpower")}
+            </a>
+             <a href="/beneficiary" className="text-sm font-medium">
               {t("beneficiaries")}
             </a>
              <a href="/pricelist" className="text-sm font-medium">

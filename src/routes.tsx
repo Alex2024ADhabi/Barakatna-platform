@@ -50,6 +50,10 @@ import SupplierManagement from "./components/Suppliers/SupplierManagement";
 import CohortManagementDashboard from "./components/Cohort/CohortManagementDashboard";
 import PriceListManagement from "./components/PriceList/PriceListManagement";
 
+import Procurement from "./components/Procurement/ProcurementManagementDashboard";
+import ManpowerManagementDashboard from "./components/Manpower/ManpowerManagementDashboard";
+
+
 // Error pages
 import NotFoundPage from "./components/ErrorPages/NotFoundPage";
 
@@ -77,6 +81,22 @@ export const routes: RouteObject[] = [
     children: [
       { index: true, element: <DashboardOverview /> },
 
+      // ManpowerManagementDashboard routes
+      {
+        path: "manpower",
+        children: [
+          { index: true, element: <ManpowerManagementDashboard /> },
+        ],
+      },
+
+      // Procurement routes
+      {
+        path: "procurement",
+        children: [
+          { index: true, element: <Procurement /> },
+        ],
+      },
+      
       // PriceListManagement routes
       {
         path: "pricelist",
